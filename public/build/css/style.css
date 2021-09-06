@@ -1,0 +1,29 @@
+.h_content {
+    text-align: right;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+.modal-header {
+    background: #2A3F54;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+}
+.close {
+    color: #eee;
+    text-shadow: 0 1px 0 #000;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+.h_content .left {
+    float: left;
+    margin-left: 0px !important;
+    margin-right: 5px !important;
+}
+td.align-middle{
+    vertical-align: middle !important;
+}
+.check{
+    width: 20px;
+    display: inline !important;
+}
