@@ -7,9 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="{{url('favicon.ico')}}" type="image/ico" />
-    
+
         <title>@yield('title', 'Admin')</title>
-    
+
         <!-- Bootstrap -->
         <link href="{{url('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
         <!-- Font Awesome -->
@@ -47,7 +47,7 @@
                 @include('backend.includes.footer')
             </div>
         </div>
-        {{--  @include('includes.partials.params')  --}}
+          @include('includes.partials.params')
 
         <!-- jQuery -->
         <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
@@ -96,7 +96,7 @@
                     'bottom':'0',
                     'margin':'auto'
                 });
-    
+
                 jQuery('#resultLoading .bg').css({
                     'background':'#000000',
                     'opacity':'0.7',
@@ -105,7 +105,7 @@
                     'position':'absolute',
                     'top':'0'
                 });
-    
+
                 jQuery('#resultLoading>div:first').css({
                     'width': '250px',
                     'height':'75px',
@@ -119,7 +119,7 @@
                     'font-size':'16px',
                     'z-index':'10',
                     'color':'#ffffff'
-    
+
                 });
                 jQuery('#resultLoading .bg').height('100%');
                 jQuery('#resultLoading').fadeIn(300);

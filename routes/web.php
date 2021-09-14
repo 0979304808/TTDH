@@ -1,5 +1,6 @@
 <?php
-use Illuminate\Support\Facades\Route; 
+
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,26 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
 
-Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function() {
-    
     // Login and register
-    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
-        Route::get('login', 'LoginController@index')->name('backend.login');
-        Route::post('login', 'LoginController@login')->name('backend.login.attem');
-    
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::get('/', 'LoginController@index')->name('backend.index');
+        Route::post('login', 'LoginController@login')->name('backend.login');
+
         Route::get('register', 'RegisterController@index')->name('backend.register');
         Route::post('register', 'RegisterController@register')->name('backend.register.create');
     });
-    
+
 
     // Login thành công
     Route::group([
-        'middleware' => 'auth'
+        'middleware' => 'user'
     ], function () {
 
         // Dashboard và logout
@@ -41,12 +38,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function() {
 
         // Administrator
         Route::group([
-            'prefix' => 'auth',
         ], function () {
+
             // Account
             Route::group([
                 'prefix' => 'accounts',
-                'namespace' => 'Auth',
+                'namespace' => 'Accounts',
                 'middleware' => ['role:administrator']
             ], function () {
                 Route::get('/', 'AccountController@list')->name('backend.account');
@@ -58,7 +55,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function() {
             // Role
             Route::group([
                 'prefix' => 'roles',
-                'namespace' => 'Auth',
+                'namespace' => 'Accounts',
                 'middleware' => ['role:administrator']
             ], function () {
                 Route::get('/', 'RoleController@list')->name('backend.role');
@@ -70,7 +67,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function() {
             // Permission
             Route::group([
                 'prefix' => 'permissions',
-                'namespace' => 'Auth',
+                'namespace' => 'Accounts',
                 'middleware' => ['role:administrator']
             ], function () {
                 Route::get('/', 'PermissionController@list')->name('backend.permission');
@@ -92,8 +89,38 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function() {
                 });
 
             });
+
+            // Posts
+            Route::group([
+                'prefix' => 'post',
+                'namespace' => 'Posts'
+            ], function () {
+                Route::get('/', 'PostController@index')->name('backend.posts');
+                Route::get('create', 'PostController@create')->name('backend.posts.create');
+                Route::post('create', 'PostController@store')->name('backend.posts.store');
+                Route::put('update', 'PostController@update')->name('backend.posts.update');
+                Route::get('detail', 'PostController@detail')->name('backend.posts.detail');
+                Route::put('catpost', 'PostController@UpdateCatePost')->name('backend.update.categories.post');
+            });
+
+            // Comments
+            Route::group([
+                'prefix' => 'comment',
+                'namespace' => 'Comments'
+            ], function () {
+                Route::post('create', 'CommentController@create')->name('backend.comments.create');
+                Route::put('update', 'CommentController@update')->name('backend.comments.update');
+            });
+
         });
 
     });
-    
+
 });
+
+// Ckfinder
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');

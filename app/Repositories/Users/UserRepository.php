@@ -27,6 +27,24 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function WithRolePermissions()
     {
-        return $this->model->with(['roles', 'permissions'])->latest()->paginate(self::_limit, ['id', 'username', 'email', 'image', 'active']);
+        return $this->model->with(['roles', 'permissions']);
+    }
+
+    public function ListAdmin()
+    {
+        return $this->model->where('active', 2)->get(['id', 'name']);
+    }
+
+    public function whereActive($active)
+    {
+        if ($active == 'không'){
+            $active = 0;
+        }
+        return $this->model->active($active)->with(['roles', 'permissions']);
+    }
+
+    public function Search($search)
+    {
+        return $this->model->search($search)->with(['roles', 'permissions']);
     }
 }

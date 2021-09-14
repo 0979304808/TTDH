@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Comments\Comment;
+use App\Models\Posts\Post;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,11 +11,16 @@ use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Roles\Role;
 use App\Models\Permissions\Permission;
+
 class User extends Authenticatable
 {
+    // active = 0 chưa kích hoạt không thể đăng nhập
+    // active = 1 tài khoản người dùng
+    // active = 2 tài khoản admin
     use LaratrustUserTrait;
     use Notifiable;
     use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -39,20 +46,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Mutators
     public function setPassWordAttribute($password)
     {
         $this->attributes['password'] = bcrypt(($password));
     }
 
-    public function setUsername($username)
+    public function setNameAttribute($value)
     {
-        $this->username = strtolower($username);
+        $this->attributes['name'] = strtolower($value);
+    }
+    // -------- end mutators ---------
+
+    // Accessors
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+    // ------ end accessors ----------
+
+    // Relationship
+    public function Post()
+    {
+        return $this->hasMany(Post::class);
     }
 
-    public function getUsername()
-    {
-        return ucwords($this->username);
-    }
 
     public function roles()
     {
@@ -64,10 +82,30 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class)->withPivotValue('user_type', self::class);
     }
 
-    public function getPermissionsViaRoles(){
+    public function comments()
+    {
+        return $this->hasOne(Comment::class);
+    }
+
+    // --------- end relationship --------
+
+    public function getPermissionsViaRoles()
+    {
         return $this->load('roles', 'roles.permissions')
             ->roles->flatMap(function ($role) {
                 return $role->permissions;
             })->sort()->values();
     }
+
+    // Scope
+    public function scopeActive($query, $active)
+    {
+        return $query->whereActive($active);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name',$search)->orWhere('email',$search);
+    }
+    // --------- end scope ------------
 }

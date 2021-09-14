@@ -102,6 +102,6 @@
         </div>
       </div>
     </div>
-    {{--  @include('includes.partials.params')  --}}
+      @include('includes.partials.params')
   </body>
 </html>

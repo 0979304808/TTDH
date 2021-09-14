@@ -18,6 +18,6 @@ class HomeController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('backend.login');
+        return redirect()->route('backend.index');
     }
 }

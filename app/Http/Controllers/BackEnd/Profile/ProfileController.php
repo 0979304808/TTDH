@@ -11,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     use ApiResponser;
-    private $user; 
+    private $user;
     public function __construct(UserRepositoryInterface $user){
         $this->user = $user;
     }
 
     // View detail profile
     public function detail(User $user){
-        $views = view('backend.profile.profile');
-        $views->with('user', $user);
-        return $views;
+        if (Auth::id() === $user->id){
+            $views = view('backend.profile.profile');
+            $views->with('user', $user);
+            return $views;
+        }
+        return  $this->error('không có quyền truy cập', 401);
     }
 
     // Update user

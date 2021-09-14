@@ -17,6 +17,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $params = $request->only('email', 'password');
+        $params['active'] = 2;
         if (Auth::attempt($params, true)) {
             return redirect()->route('backend.dashboard');
         }

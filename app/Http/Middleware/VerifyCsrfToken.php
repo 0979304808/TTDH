@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'ckfinder/*', // Tắt cơ chế bảo vệ CSRF
     ];
 }
