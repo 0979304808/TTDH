@@ -61,6 +61,8 @@
         <script src="{{ url('vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ url('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
         <script src="{{ url('vendors/switchery/dist/switchery.min.js')  }}"></script>
+        <!-- pusher -->
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         {{-- before script --}}
         @yield('before-script')
         <!-- Custom Theme Scripts -->

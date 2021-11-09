@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\NewEvent;
+use Goutte\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// --------------------- BackEnd -------------------------
 
 Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
 
@@ -101,6 +104,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
                 Route::put('update', 'PostController@update')->name('backend.posts.update');
                 Route::get('detail', 'PostController@detail')->name('backend.posts.detail');
                 Route::put('catpost', 'PostController@UpdateCatePost')->name('backend.update.categories.post');
+                Route::delete('delete', 'PostController@delete')->name('backend.delete.post');
             });
 
             // Comments
@@ -111,6 +115,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
                 Route::post('create', 'CommentController@create')->name('backend.comments.create');
                 Route::put('update', 'CommentController@update')->name('backend.comments.update');
             });
+
+            // test
+            Route::group([
+                'prefix' => 'test',
+            ], function () {
+                Route::get('/', function () {
+                    event(new NewEvent('abc'));
+                });
+            });
+
 
         });
 
@@ -124,3 +138,51 @@ Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderC
 
 Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
     ->name('ckfinder_browser');
+
+
+Route::get('test', function () {
+    $this->client = new Client();
+    $url = 'https://vnexpress.net/doi-song/to-am';
+    $crawler = $this->client->request('GET', $url);
+
+    $crawler->filter('.col-left-subfolder .item-news-common ')->each(function ($node) {
+        // $a =   $node->filter('.thumb-art')->each(function ($n) {
+        //     return  ($n->filter('picture img')->attr('src'));
+        // });
+        // dd($a);
+
+        $b = $node->filter('.thumb-art')->each(function ($n) {
+            return $n->filter(' a')->attr('href');
+        });
+
+        // echo ($node->filter('.title-news a')->text());
+
+        // dd ($node->filter('.description a')->html());
+
+    });
+});
+
+// ---------------------End  BackEnd -------------------------
+
+
+// ------------------- FrontEnd -------------------
+// Auth
+Route::group([
+    'prefix' => 'auth',
+    'namespace' => 'Auth'
+], function () {
+
+    Route::get('/redirect/{provider}', 'SocialController@handler');
+
+    Route::get('/callback/{provider}', 'SocialController@callback');
+
+});
+
+
+
+Route::group(['namespace' => 'FrontEnd'], function () {
+
+    Route::get('/', 'HomeController@index');
+
+
+});

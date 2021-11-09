@@ -6,7 +6,7 @@ use App\Repositories\Comments\Contract\CommentRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\Events\NewEvent;
 class CommentController extends Controller
 {
     private $comment;
@@ -19,6 +19,7 @@ class CommentController extends Controller
     public function create(Request $request)
     {
         $data =  $request->all();
+        event(new NewEvent($data));
         if ($data['type'] == 'comment'){
             return $this->comment->create([
                 'user_id' => Auth::id(),

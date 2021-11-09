@@ -1,0 +1,50 @@
+
+.table1{
+    display: flex;
+}
+.img{
+    width: 200px;
+    height: 100%;
+}
+.text{
+    max-width: 240px;
+    height: 100%;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.title{
+    display: contents;  
+}
+#list  p {
+    font: arial;
+    font-size: 14px;
+}
+.news{
+    height: 100%;  
+}
+.text-news{
+    min-width: 400px;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 38px;
+}
+.icons{
+    text-decoration: none;
+    font-size: 20px;
+   
+}
+.bi-back{
+    font-size: 30px;
+    color: black;
+    
+}
+.icon-back{
+    margin-top: 20px;
+    margin-left: 10px;
+    position: fixed ;
+}
+.nhac{
+    display: none;
+}

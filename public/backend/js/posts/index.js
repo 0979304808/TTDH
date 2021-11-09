@@ -1,4 +1,5 @@
 $(function(){
+    console.log(url_delete_post);
     var data = posts.data;
 
     $('.input-search').keypress(function(e){
@@ -40,10 +41,12 @@ $(function(){
                 type: "POST",
                 url: url_delete_post,
                 data: {
+                    _method : 'DELETE',
                     id: id,
                 },
                 headers: {'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')},
                 success: function (response) {
+                    console.log(response)
                     notify('Xoá thành công !', 'success');
                     $(".record_jlpt"+id).remove();
                 },

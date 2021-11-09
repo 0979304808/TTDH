@@ -17,9 +17,13 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('title');
+            $table->string('slug');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->string('content',6000)->nullable();
+            $table->integer('view')->default(0);
+            $table->integer('like')->default(0);
+            $table->string('type')->default('post');
             $table->timestamps();
         });
     }

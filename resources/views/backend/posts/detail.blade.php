@@ -2,7 +2,7 @@
 @section('after-script')
     {{ HTML::script('backend/js/posts/detail.js') }}
     <style>
-        p {
+        .image {
             text-align: center;
         }
         .box-child-comment {
@@ -24,7 +24,7 @@
 @endsection
 @section('main')
     @if(request('post'))
-        <div class="content">
+        <div class="content-{{ $post->id }}">
             <div class="col-xs-9">
                 <div class="col-xs-12">
                     <div class="x_panel">

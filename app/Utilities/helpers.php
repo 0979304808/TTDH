@@ -4,18 +4,6 @@ use App\Models\Socials\Language;
 use App\User;
 use Carbon\Carbon;
 
-if(!function_exists('all_language')){
-    /**
-     * Get all language
-     *
-     * @return \App\Models\Socials\Language
-     */
-    function all_language(){
-        $lang = Language::orderBy('name')->pluck('name', 'id');
-        return $lang;
-    }
-}
-
 if(!function_exists('user')){
     /**
      * Get the authenticated user
@@ -68,30 +56,50 @@ if(!function_exists('my_slug')){
     }
 }
 
-if(!function_exists('convert_vi_to_en')){
-    /**
-     * Convert vietnamese without diacritical marks
-     * @param string $string
-     */
-    function convert_vi_to_en($string){
-        $string = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", "a", $string);
-        $string = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", "e", $string);
-        $string = preg_replace("/(ì|í|ị|ỉ|ĩ)/", "i", $string);
-        $string = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", "o", $string);
-        $string = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", "u", $string);
-        $string = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", "y", $string);
-        $string = preg_replace("/(đ)/", "d", $string);
-        $string = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", "A", $string);
-        $string = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", "E", $string);
-        $string = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", "I", $string);
-        $string = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", "O", $string);
-        $string = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", "U", $string);
-        $string = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", "Y", $string);
-        $string = preg_replace("/(Đ)/", "D", $string);
-
+if (!function_exists('create_slug')) {
+    function create_slug($string)
+    {
+        $search = array(
+            '#(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)#',
+            '#(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)#',
+            '#(ì|í|ị|ỉ|ĩ)#',
+            '#(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)#',
+            '#(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)#',
+            '#(ỳ|ý|ỵ|ỷ|ỹ)#',
+            '#(đ)#',
+            '#(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)#',
+            '#(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)#',
+            '#(Ì|Í|Ị|Ỉ|Ĩ)#',
+            '#(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)#',
+            '#(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)#',
+            '#(Ỳ|Ý|Ỵ|Ỷ|Ỹ)#',
+            '#(Đ)#',
+            "/[^a-zA-Z0-9\-\_]/",
+        );
+        $replace = array(
+            'a',
+            'e',
+            'i',
+            'o',
+            'u',
+            'y',
+            'd',
+            'A',
+            'E',
+            'I',
+            'O',
+            'U',
+            'Y',
+            'D',
+            '-',
+        );
+        $string = preg_replace($search, $replace, $string);
+        $string = preg_replace('/(-)+/', '-', $string);
+        $string = strtolower($string);
         return $string;
     }
 }
+
 
 
 if(!function_exists('curl_post')){
@@ -134,85 +142,5 @@ if(!function_exists('curl_get')){
 		$response = curl_exec($ch);
 		curl_close($ch);
 		return json_decode($response);
-    }
-}
-
-if(!function_exists('make_url_pagi')){
-    function make_url_pagi($uri,array $query_string){
-        $string = '';
-        foreach ($query_string as $key => $val)
-        {
-            $string .= "&$key=$val";
-        }
-        return $uri . ($string ? '?'.ltrim($string, '&') : '');
-    }
-}
-
-if(!function_exists('paging')){
-    /**
-     * custom for my pagination
-     */
-    function paging($link, $total_records, $current_page, $limit, $keyword = '')
-    {
-        $range = 10;
-        $min   = 0;
-        $max   = 0;
-
-        $total_page = ceil($total_records / $limit);
-
-        if($current_page > $total_page){
-            $current_page = $total_page;
-        }elseif($current_page < 1){
-            $current_page = 1;
-        }
-
-        $middle = ceil($range/2);
-        if($total_page < $range){
-            $min = 1;
-            $max = $total_page;
-        }else{
-            $min = $current_page - ($middle + 1);
-            $max = $current_page + ($middle - 1);
-
-            if($min<1){
-                $min = 1;
-                $max = $range;
-            }elseif($max > $total_page){
-                $max = $total_page;
-                $min = $total_page - $range + 1;
-            }
-        }
-
-        $start = ($current_page -1)*$limit;
-        $html = "<div class='text-center'>";
-        $html .= "<nav aria-label='Page navigation'>";
-        $html .= "<ul class='pagination'>";
-
-        if($current_page > 1 && $max > 1){
-            $html .= '<li><a href="'.str_replace('{page}', $current_page-1, $link).'" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
-        }
-
-        for($i=$min; $i<=$max; $i++){
-            if($i == $current_page){
-                $html .= '<li class="active"><a>'.$i.'<span class="sr-only"></span></a></li>';
-            }else{
-                $html .= '<li><a href="'.str_replace('{page}', $i, $link).'">'.$i.'<span class="sr-only"></span></a></li>';
-
-            }
-        }
-
-        if($current_page < $max && $max > 1){
-            $html .= '<li><a href="'.str_replace('{page}', $current_page+1, $link).'"aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
-        }
-        $html .= "</ul>";
-        $html .= "</nav>";
-        $html .= "</div>";
-        // Trả kết quả
-        return array(
-            'start' => $start,
-            'limit' => $limit,
-            'key'  => $keyword,
-            'html' => $html
-        );
     }
 }

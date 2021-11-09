@@ -32,7 +32,7 @@
                            placeholder="Nhập id, tên bài viết ..." value="{{ request('search') }}">
                 </div>
                 <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>
-                <a href="">
+                <a href="{{ route('backend.posts.create') }}">
                     <button class="btn btn-primary pull-right">Thêm mới bài viết</button>
                 </a>
                 <hr>
@@ -55,9 +55,11 @@
                             <tr class="record_jlpt{{ $value->id }}">
                                 <td class="text-center">{{ $key + 1 }}</td>
                                 <td>{{ $value->title }}</td>
-                                <td class="text-center"><img src="{{ $value->image ?? asset('images/default.png') }}" alt=""
-                                         style="width: 116px;height: auto;border-radius: 10px;"></td>
-                                <td class="text-center"><a href="javascript:void();" class="detail-content"
+                                <td class="text-center"><img src="{{ $value->image ?? asset('images/default.png') }}"
+                                                             alt=""
+                                                             style="width: 116px;height: auto;border-radius: 10px;">
+                                </td>
+                                <td class="text-center"><a href="javascript:;" class="detail-content"
                                                            style="text-decoration:underline"
                                                            data-content="{{ $value->content }}">Xem chi tiết</a></td>
                                 <td class="text-center">{{isset($value->user->name) ?  $value->user->name : '' }}
@@ -68,12 +70,13 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-primary btn-category-for-post " data-key="{{ $key }}"
+                                    <button type="button" class="btn btn-sm btn-primary btn-category-for-post "
+                                            data-key="{{ $key }}"
                                             data-id="{{ $value->id }}"><i class="fa fa-delicious"></i> Danh mục
                                     </button>
                                     <a href="{{ route('backend.posts.create').'?id='.$value->id }}">
                                         <button class="btn btn-sm btn-dark "><i class="fa fa-wrench"
-                                                                                            aria-hidden="true"></i> Sửa
+                                                                                aria-hidden="true"></i> Sửa
                                         </button>
                                     </a>
                                     <button class="btn btn-sm btn-danger  btn_del" data-id="{{ $value->id }}">
@@ -82,7 +85,8 @@
 
                                     <a href="{{ route('backend.posts.detail').'?post='.$value->id }}">
                                         <button class="btn btn-sm btn-info "><i class="fa fa-wrench"
-                                                                                aria-hidden="true"></i> Chi tiết bài viết
+                                                                                aria-hidden="true"></i> Chi tiết bài
+                                            viết
                                         </button>
                                     </a>
                                 </td>

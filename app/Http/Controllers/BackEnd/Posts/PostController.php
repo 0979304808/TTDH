@@ -45,6 +45,7 @@ class PostController extends Controller
             'posts' => $posts,
             'url_list_post' => route('backend.posts'),
             'link_update_categories_post' => route('backend.update.categories.post'),
+            'url_delete_post' => route('backend.delete.post')
         ]);
         $view = view('backend.posts.index');
         $view->with('posts', $posts);
@@ -81,14 +82,15 @@ class PostController extends Controller
         $post = Post::create([
             'user_id' => 1,
             'title' => $attribute['title'],
+            'slug' => create_slug($attribute['title']),
             'image' => $this->saveImage($file, $filename),
             'description' => $attribute['description'],
             'content' => $attribute['content'],
         ]);
-//        array_values($a)
         if (request('categories') != null) {
             $post->categories()->attach(request('categories'));
         }
+        return redirect()->route('backend.posts');
     }
 
     // Update post
@@ -110,7 +112,7 @@ class PostController extends Controller
 
     public function detail()
     {
-        $post = $this->post->whereCatAuthor('all','all')->find(request('post'));
+        $post = $this->post->whereCatAuthor('all', 'all')->find(request('post'));
         $listPost = $this->post->ListPost(request('post'));
         JavaScript::put([
             'post' => $post,
@@ -118,8 +120,8 @@ class PostController extends Controller
             'link_update_package' => route('backend.comments.update')
         ]);
         $view = view('backend.posts.detail');
-        $view->with('post',$post);
-        $view->with('listPost',$listPost);
+        $view->with('post', $post);
+        $view->with('listPost', $listPost);
         return $view;
     }
 
@@ -129,6 +131,14 @@ class PostController extends Controller
         $post = $this->post->find(request('id'));
         if ($post) {
             $post->categories()->sync(request('categories'));
+            return $this->success('Thành công', 200);
+        }
+    }
+
+    public function delete()
+    {
+        $id = request('id');
+        if ($this->post->find($id)->delete()){
             return $this->success('Thành công', 200);
         }
     }

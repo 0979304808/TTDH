@@ -1,4 +1,6 @@
 $(function(){
+
+    $("img").parent().addClass('image');
     //======== edit comment =========
     // $('.btn-edit-submit-comment').click(function(e){
     //     e.preventDefault();
@@ -48,7 +50,7 @@ $(function(){
                 title: title.trim()
             },
             success:function(res){
-                
+
             },
             error: function(e){
                 console.log(e);
@@ -132,7 +134,6 @@ $(function(){
                 console.log(e);
             }
         });
-
     })
 
     //========= end =========
@@ -182,5 +183,18 @@ $(function(){
             });
         }
     })
-    
+
+    // comments
+    var id = $('.btn-comment').data('id');
+    $('.comments-'+id+'.box-comment').before(" <h2>Appended text</h2>.")
+    Pusher.logToConsole = true;
+    var pusher = new Pusher('2614334692536e458015', {
+    cluster: 'ap1'
+    });
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('comment-submit', function(data) {
+        var data = JSON.stringify(data.data);
+        console.log(data);
+        $('.content-'+data.id + '.box-comment').append('dsadasd');
+    });
 })
