@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hunghuns/TTDH/
+    - /bin/cp -R images $DEPLOYPATH
