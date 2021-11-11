@@ -4,18 +4,13 @@
         <div class="box-banner-top row">
             <div class="col-md-5 box-left">
                 <a href="#">
-                    <img class="media-object" src="{{ asset('images/banner1.jpg') }}" alt="...">
+                    <img class="media-object" src="{{ $banner->image }}" alt="...">
                 </a>
             </div>
             <div class="col-md-7 box-right">
                 <a href="#">
-                    <h3>Media heading
-                        Media heading
-                        Media heading
-                        Media heading
-                        Media heading
-                    </h3>
-                    <span>>Media heading Media heading Media heading Media heading Media heading Media heading Media heading </span>
+                    <h3>{{ $banner->title }}</h3>
+                    <span>{{ $banner->description }}</span>
                 </a>
             </div>
         </div>
@@ -25,56 +20,67 @@
             <div class="content-left col-md-4 row">
 
                 <div class="box-item-category col-md-12">
-
-                    <h3 class="col-md-12 title">Baif viet moi nhat</h3>
-                    <div class="col-md-5 left">
-                        <a href="#">
-                            <img class="media-object" src="{{ asset('images/banner1.jpg') }}" alt="...">
-                        </a>
-                    </div>
-                    <div class=" col-md-7 right">
-                        <span>Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay</span>
-                    </div>
                     <div class="col-md-12">
-                        <hr>
+                        <h3 class="title-category">Tin mới nhất</h3>
                     </div>
-                    <h3 class="col-md-12 title">Baif viet moi nhat</h3>
-                    <div class="col-md-5 left">
-                        <a href="#">
-                            <img class="media-object" src="{{ asset('images/banner1.jpg') }}" alt="...">
-                        </a>
-                    </div>
-                    <div class=" col-md-7 right">
-                        <span>Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay Bài viết mới nhất mới được cập nhật hôm nay</span>
-                    </div>
+                    @foreach($posts_new as $key => $value)
+
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+
+                        <h3 class="col-md-12 title">{{ $value->title }}</h3>
+                        <div class="col-md-5 left">
+                            <a href="#">
+                                <img class="media-object" src="{{ $value->image }}" alt="...">
+                            </a>
+                        </div>
+
+                        <div class=" col-md-7 right">
+                            <span>{{ $value->description }}</span>
+                        </div>
+
+                    @endforeach
+
 
                 </div>
-
 
 
 
             </div>
             <div class="content-right col-md-8">
 
+                <div class="box-content">
 
-                <div class="media banner-top">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="{{ asset('images/banner1.jpg') }}" alt="...">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <a href="#">
-                            <h3 class="media-heading">Media heading
-                                Media heading
-                                Media heading
-                                Media heading
-                                Media heading
-                            </h3>
-                            <span>>Media heading Media heading Media heading Media heading Media heading Media heading Media heading </span>
-                        </a>
-                    </div>
+                    @foreach($categories as $category)
+                        <div class="item">
+                            <h4 class="title-category">{{ $category->name }}</h4>
+                            <div class="media box-item">
+
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img width="100%" class="media-object" src="{{ asset('images/banner1.jpg') }}" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#">
+                                        <h3 class="media-heading">Media heading
+                                            Media heading
+                                            Media heading
+                                            Media heading
+                                            Media heading
+                                        </h3>
+                                        <span>>Media heading Media heading Media heading Media heading Media heading Media heading Media heading </span>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    @endforeach
+
                 </div>
+
 
 
 

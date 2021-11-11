@@ -34,6 +34,11 @@ a:focus {
   height: auto !important;
 }
 
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .main {
   min-height: 80vh;
 }
@@ -46,11 +51,17 @@ a:focus {
 .main .home .box-banner-top .box-right h3 {
   font-weight: 600;
 }
+.main .home .box-banner-top .box-left {
+  padding: 0;
+}
 .main .home .box-content {
   clear: both;
 }
 .main .home .box-content img {
   width: 100%;
+}
+.main .home .box-content .content-left {
+  padding: 0;
 }
 .main .home .box-content .content-left .box-item-category {
   padding: 0;
@@ -60,7 +71,43 @@ a:focus {
 }
 .main .home .box-content .content-left .box-item-category .right {
   margin-top: -4px;
-  padding: 0px 15px 15px 15px;
+  padding: 0 15px 15px 15px;
+}
+.main .home .box-content .content-left .box-item-category h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.main .home .box-content .content-left .box-item-category .title-category {
+  font-size: 23px;
+  text-transform: uppercase;
+}
+.main .home .box-content .content-left .box-item-category .title-category:before {
+  content: "";
+  width: 5%;
+  border-top: 4px solid red;
+  position: absolute;
+  bottom: 0;
+}
+.main .home .box-content .content-right {
+  padding-right: 0;
+}
+.main .home .box-content .content-right .box-content {
+  background: #fff;
+  padding: 10px;
+}
+.main .home .box-content .content-right .box-content .box-item .media-left {
+  width: 30%;
+}
+.main .home .box-content .content-right .box-content .title-category {
+  position: relative;
+  padding-bottom: 15px;
+}
+.main .home .box-content .content-right .box-content .title-category:before {
+  content: "";
+  border-top: 3px solid red;
+  width: 100px;
+  position: absolute;
+  bottom: 0;
 }
 .main .home .box-relate-to {
   margin-top: 30px;
