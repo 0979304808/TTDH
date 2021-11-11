@@ -31,4 +31,8 @@ Crawl data báo trên vnexpress
 
 php artisan scraper:vnexpress
 
+php artisan serve
+
+http://localhost:8000/admin
+
 !!! Chúc các bạn thành công.
