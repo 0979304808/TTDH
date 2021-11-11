@@ -95,9 +95,9 @@ class Vnexpress {
                     'date' => $content['date'],
                     'category' => $category
                 ];
-                // if(!Post::where('slug', create_slug($title))->exists()){
+                if(!Post::where('slug', create_slug($title))->exists()){
                     $this->save_data($array);
-                // }
+                }
             }
         });
         $datas = array_filter($datas, function($value) { return !is_null($value) && $value !== ''; });
