@@ -20,10 +20,12 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
-            $table->string('content',6000)->nullable();
+            $table->text('content',10000)->nullable();
             $table->integer('view')->default(0);
             $table->integer('like')->default(0);
             $table->string('type')->default('post');
+            $table->string('created_date')->nullable();
+            $table->string('source')->nullable();
             $table->timestamps();
         });
     }

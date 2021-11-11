@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Carbon;
+use App\Console\Commands\Vnexpress;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,13 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
 
-        $schedule->call(function () {
-            echo Carbon::now();
-            dd('ok');
-        })->everyMinute();
+        $schedule->command('scraper:vnexpress')->everyMinute();
+        // $schedule->call(function () {
+        //     echo Carbon::now();
+        // })->everyMinute();
     }
 
     /**

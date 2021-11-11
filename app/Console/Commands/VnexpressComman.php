@@ -12,7 +12,7 @@ class VnexpressComman extends Command
      *
      * @var string
      */
-    protected $signature = 'command:vnexpress';
+    protected $signature = 'scraper:vnexpress';
 
     /**
      * The console command description.

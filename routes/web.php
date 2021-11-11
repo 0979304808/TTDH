@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Events\NewEvent;
 use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -139,29 +141,6 @@ Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderC
 Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
     ->name('ckfinder_browser');
 
-
-Route::get('test', function () {
-    $this->client = new Client();
-    $url = 'https://vnexpress.net/doi-song/to-am';
-    $crawler = $this->client->request('GET', $url);
-
-    $crawler->filter('.col-left-subfolder .item-news-common ')->each(function ($node) {
-        // $a =   $node->filter('.thumb-art')->each(function ($n) {
-        //     return  ($n->filter('picture img')->attr('src'));
-        // });
-        // dd($a);
-
-        $b = $node->filter('.thumb-art')->each(function ($n) {
-            return $n->filter(' a')->attr('href');
-        });
-
-        // echo ($node->filter('.title-news a')->text());
-
-        // dd ($node->filter('.description a')->html());
-
-    });
-});
-
 // ---------------------End  BackEnd -------------------------
 
 
@@ -185,4 +164,40 @@ Route::group(['namespace' => 'FrontEnd'], function () {
     Route::get('/', 'HomeController@index');
 
 
+});
+
+
+
+
+// Crawl data 
+
+Route::get('test', function () {
+    $this->client = new Client();
+    $url = 'https://vnexpress.net/doi-song/to-am';
+    $crawler = $this->client->request('GET', $url);
+    $data = $crawler->filter('.list-news-subfolder article.item-news');
+    $datas = []; 
+    $a = $data->each(function(Crawler $item, $i) use ($datas){
+        if($i < 5){
+            $description = $item->filter('.description')->text() ?? null;
+            $title = $item->filter('.title-news')->text() ?? null;
+            $image = $item->filter('.thumb-art img')->attr('src') ?? null;
+            $link = $item->filter('.thumb-art a')->attr('href') ?? null;
+            $array = [
+                'title' => $title,
+                'image' => $image,
+                'description' => $description,
+                'link' => $link,
+            ];
+            array_push($datas, $array); 
+        }
+        return $datas;
+    });
+    dd($a);
+
+    // $a = $data->each(
+    //     function($node){
+    //        return $node->filter('.item-news')->html();
+    // });
+    // dd($a);
 });
