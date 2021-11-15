@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/master.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
     <title>Document</title>
 </head>
 <div class="banner">
     <img src="{{ asset('images/banner.jpg') }}">
 </div>
 <nav class="navbar navbar-default header">
-    <div class="container">
+    <div class="container-body">
         <div class="container-fluid ">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">

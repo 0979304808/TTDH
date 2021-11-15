@@ -2,6 +2,10 @@ body {
     font-family: Roboto, Sans-Serif;
     background: #F7F7F7;
 }
+.container-body {
+    margin: 0 auto;
+    max-width: 1500px;
+}
 
 img {
     width: 100%;
@@ -47,6 +51,15 @@ a {
 
     // Home
     .home {
+        margin-bottom: 100px;
+        #carousel-banner {
+            li.item-o {
+                border: 1px solid #000000;
+            }
+            li.active {
+                background: #000000;
+            }
+        }
         .box-banner-top {
             background: #fff;
             box-shadow: 2px 3px 10px 1px #f2f2f2;
@@ -94,7 +107,7 @@ a {
                         text-transform: uppercase;
                         &:before {
                             content: "";
-                            width: 5%;
+                            width: 20%;
                             border-top: 4px solid red;
                             position: absolute;
                             bottom: 0;
@@ -106,41 +119,109 @@ a {
                 padding-right: 0;
                 .box-content {
                     background: #fff;
-                    padding: 10px;
+                    padding: 20px;
                     .box-item {
-
+                        clear: both;
                         .media-left {
                             width: 30%;
+                        }
+                        .media-body {
+                            .media-heading {
+                                font-weight: 600;
+                                font-size: 21px;
+                            }
                         }
                     }
                     .title-category {
                         position: relative;
                         padding-bottom: 15px;
+                        margin-top: 0;
+                        float:left;
+                        margin-bottom: 30px;
+                        font-weight: 600;
                         &:before {
                             content: "";
                             border-top: 3px solid red;
-                            width: 100px;
+                            width: 100%;
                             position: absolute;
                             bottom: 0;
                         }
+                    }
+                    .view-all-post {
+                        float: right;
                     }
                 }
             }
         }
 
-        .box-relate-to {
-            margin-top: 30px;
+        .box-highlights {
+            background: #fff;
+            title {
+                font-weight: 600;
 
+            }
+            h3 {
+                font-weight: 600;
+            }
+            .title-comment, .title-like {
+                font-size: 20px;
+            }
             .box-item {
                 background: #fff;
             }
+            ul {
+                padding: 0 20px;
+                li {
+                    padding: 0 15px;
+                    list-style: none;
+                }
+            }
         }
+
+        .box-relate-to {
+            margin-top: 50px;
+            .thumbnail {
+                border: none;
+                .caption {
+                    h3 {
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                }
+            }
+            .title-top {
+                h3 {
+                    font-weight: 600;
+                    text-align: center;
+                    position: relative;
+                    margin-bottom: 30px;
+                    padding-bottom: 15px;
+                    &:after {
+                        margin: 0 auto;
+                        content: '';
+                        border-bottom: 3px solid red;
+                        width: 120px;
+                        position: absolute;
+                        right: 0;
+                        left: 0;
+                        bottom: 0;
+                    }
+                }
+            }
+        }
+
     }
 
     // --------- End home --------------
 }
 
 .footer {
+    border-top: 2px solid #e0e0e0;
     clear: both;
+    min-height: 100px;
+    h4 {
+        line-height: 100px;
+    }
 }
+
 
