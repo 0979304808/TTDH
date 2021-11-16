@@ -163,20 +163,25 @@ Route::group(['namespace' => 'FrontEnd'], function () {
 
     Route::get('/', 'HomeController@index');
 
+    Route::group([
+        'prefix' => 'bai-viet',
+     ], function (){
+        Route::get('/{slug}', 'PostController@detail');
+    });
 
 });
 
 
 
 
-// Crawl data 
+// Crawl data
 
 Route::get('test', function () {
     $this->client = new Client();
     $url = 'https://vnexpress.net/doi-song/to-am';
     $crawler = $this->client->request('GET', $url);
     $data = $crawler->filter('.list-news-subfolder article.item-news');
-    $datas = []; 
+    $datas = [];
     $a = $data->each(function(Crawler $item, $i) use ($datas){
         if($i < 5){
             $description = $item->filter('.description')->text() ?? null;
@@ -189,7 +194,7 @@ Route::get('test', function () {
                 'description' => $description,
                 'link' => $link,
             ];
-            array_push($datas, $array); 
+            array_push($datas, $array);
         }
         return $datas;
     });

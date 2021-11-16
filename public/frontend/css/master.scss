@@ -168,6 +168,9 @@ a {
             }
             .box-item {
                 background: #fff;
+                .caption {
+                    min-height: 200px;
+                }
             }
             ul {
                 padding: 0 20px;
@@ -213,6 +216,112 @@ a {
     }
 
     // --------- End home --------------
+
+    // Post Detail
+
+    .post-detail {
+        margin-top: 40px;
+        margin-bottom: 100px;
+        .box-left {
+            background: #fff;
+            .top {
+                margin-top: 30px;
+                padding-bottom: 30px;
+                .category {
+                    float: left;
+                    a {
+                        color: red;
+                    }
+                }
+                .date {
+                    float: right;
+                    font-weight: 600;
+                }
+            }
+            .image {
+                margin: 30px 0;
+            }
+            .title {
+                clear: both;
+                font-weight: 600;
+            }
+            .form {
+                margin-bottom: 40px;
+                button {
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+            .comment {
+                .input-form {
+                    margin-bottom: 15px;
+                }
+                .parent {
+                    .media-left {
+                        img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .media-body {
+                        h5 {
+                            font-weight: 600;
+                        }
+                        span {
+                            margin-right: 15px;
+                            a {
+                                color: #8d8d8d;
+                            }
+                        }
+                        .child {
+                            padding-left: 13px;
+                            margin-top: 10px;
+                            border-left: 2px solid #c3c3c3;
+                        }
+
+                    }
+                }
+
+            }
+            .shore-more {
+                margin: 30px 0;
+                a {
+                     display: block;
+                    padding: 10px 5px;
+                    background: #f7f7f7;
+                    color: #007bff;
+                    font-weight: 600;
+                    transition: 0.9s;
+                    &:hover {
+                        background: #087CCE;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .box-right {
+            .title {
+                margin: 0 0 20px;
+                padding: 0;
+                font-weight: 600;
+            }
+            .thumbnail {
+                border: none;
+                .caption {
+                    h4 {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+
+    // ----------- End Post Detail ---------
+
+
 }
 
 .footer {

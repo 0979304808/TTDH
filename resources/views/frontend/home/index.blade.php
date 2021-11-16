@@ -177,7 +177,9 @@
                                 <div class="caption">
                                     <h3>{{ $value->title }}</h3>
                                     <p>{{ $value->description }}</p>
-
+                                </div>
+                                <div class="bottom">
+                                    <span>Xem chi tiết</span>
                                 </div>
                             </div>
                         </a>

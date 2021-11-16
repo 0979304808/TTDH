@@ -152,6 +152,9 @@ a:focus {
 .main .home .box-highlights .box-item {
   background: #fff;
 }
+.main .home .box-highlights .box-item .caption {
+  min-height: 200px;
+}
 .main .home .box-highlights ul {
   padding: 0 20px;
 }
@@ -185,6 +188,88 @@ a:focus {
   right: 0;
   left: 0;
   bottom: 0;
+}
+.main .post-detail {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+.main .post-detail .box-left {
+  background: #fff;
+}
+.main .post-detail .box-left .top {
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+.main .post-detail .box-left .top .category {
+  float: left;
+}
+.main .post-detail .box-left .top .category a {
+  color: red;
+}
+.main .post-detail .box-left .top .date {
+  float: right;
+  font-weight: 600;
+}
+.main .post-detail .box-left .image {
+  margin: 30px 0;
+}
+.main .post-detail .box-left .title {
+  clear: both;
+  font-weight: 600;
+}
+.main .post-detail .box-left .form {
+  margin-bottom: 40px;
+}
+.main .post-detail .box-left .form button:focus {
+  outline: none;
+}
+.main .post-detail .box-left .comment .input-form {
+  margin-bottom: 15px;
+}
+.main .post-detail .box-left .comment .parent .media-left img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.main .post-detail .box-left .comment .parent .media-body h5 {
+  font-weight: 600;
+}
+.main .post-detail .box-left .comment .parent .media-body span {
+  margin-right: 15px;
+}
+.main .post-detail .box-left .comment .parent .media-body span a {
+  color: #8d8d8d;
+}
+.main .post-detail .box-left .comment .parent .media-body .child {
+  padding-left: 13px;
+  margin-top: 10px;
+  border-left: 2px solid #c3c3c3;
+}
+.main .post-detail .box-left .shore-more {
+  margin: 30px 0;
+}
+.main .post-detail .box-left .shore-more a {
+  display: block;
+  padding: 10px 5px;
+  background: #f7f7f7;
+  color: #007bff;
+  font-weight: 600;
+  transition: 0.9s;
+}
+.main .post-detail .box-left .shore-more a:hover {
+  background: #087CCE;
+  color: #fff;
+}
+.main .post-detail .box-right .title {
+  margin: 0 0 20px;
+  padding: 0;
+  font-weight: 600;
+}
+.main .post-detail .box-right .thumbnail {
+  border: none;
+}
+.main .post-detail .box-right .thumbnail .caption h4 {
+  font-weight: 600;
 }
 
 .footer {
