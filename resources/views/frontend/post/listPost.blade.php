@@ -1,4 +1,7 @@
 @extends('frontend.includes.master')
+@section('title')
+    Danh mục | {{ $category->name }}
+@endsection
 @section('content')
     <div class="list-post container">
 

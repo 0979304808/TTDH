@@ -1,4 +1,7 @@
 @extends('frontend.includes.master')
+@section('title')
+    Chi tiết bài viết
+@endsection
 @section('content')
     <div class="post-detail container">
 
@@ -6,7 +9,7 @@
             <div class="box-left col-md-9">
                 <div class="top">
                     <span class="category">
-                        <a href="#">{{ ($post->categories)[0]->name }}</a>
+                        <a href="/danh-muc/{{ ($post->categories)[0]->slug }}">{{ ($post->categories)[0]->name }}</a>
                     </span>
                     <span class="date">{{ $post->created_at->format('H:s d-m-Y') }}</span>
                 </div>

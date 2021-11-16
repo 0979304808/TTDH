@@ -1,4 +1,7 @@
 @extends('frontend.includes.master')
+@section('title')
+    Trang chủ
+@endsection
 @section('content')
     <div class="home container">
 
@@ -125,7 +128,7 @@
                         <div class="item">
                             <h4 class="title-category">{{ $list_post->name }}</h4>
                             <div class="view-all-post">
-                                <a href="#">Xem tất cả</a>
+                                <a href="/danh-muc/{{ $list_post->slug }}">Xem tất cả</a>
                             </div>
                             @if(count($list_post->posts) > 0 )
                                 @foreach($list_post->posts->take(3) as $post)

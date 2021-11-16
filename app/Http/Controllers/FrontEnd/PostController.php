@@ -11,9 +11,8 @@ use App\Http\Controllers\Controller;
 class PostController extends Controller
 {
 
-    public function index()
+    public function index($slug)
     {
-        @$slug = request('slug');
         $category = Category::where('slug', $slug)->first();
         $view = view('frontend.post.listPost');
         $view->with('category',$category);

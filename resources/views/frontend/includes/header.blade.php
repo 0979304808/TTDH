@@ -10,7 +10,7 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 
-    <title>Document</title>
+    <title>@yield('title')</title>
 </head>
 <div class="banner">
     <img src="{{ asset('images/banner.jpg') }}">
