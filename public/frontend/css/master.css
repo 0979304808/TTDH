@@ -168,6 +168,9 @@ a:focus {
 .main .home .box-relate-to .thumbnail {
   border: none;
 }
+.main .home .box-relate-to .thumbnail .caption {
+  min-height: 200px;
+}
 .main .home .box-relate-to .thumbnail .caption h3 {
   font-size: 16px;
   font-weight: 600;

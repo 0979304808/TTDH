@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Models\Categories\Category;
 use App\Models\Posts\Post;
 use App\Repositories\Posts\Contract\PostRepositoryInterface;
 use Illuminate\Http\Request;
@@ -12,7 +13,11 @@ class PostController extends Controller
 
     public function index()
     {
-
+        @$slug = request('slug');
+        $category = Category::where('slug', $slug)->first();
+        $view = view('frontend.post.listPost');
+        $view->with('category',$category);
+        return $view;
     }
 
     public function detail($slug)

@@ -186,6 +186,7 @@ a {
             .thumbnail {
                 border: none;
                 .caption {
+                    min-height: 200px;
                     h3 {
                         font-size: 16px;
                         font-weight: 600;

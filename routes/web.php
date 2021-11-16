@@ -166,6 +166,7 @@ Route::group(['namespace' => 'FrontEnd'], function () {
     Route::group([
         'prefix' => 'bai-viet',
      ], function (){
+        Route::get('/', 'PostController@index');
         Route::get('/{slug}', 'PostController@detail');
     });
 

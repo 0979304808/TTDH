@@ -50,13 +50,13 @@
                             <hr>
                         </div>
                         <a href="/bai-viet/{{ $value->slug }}">
-                            <h3 class="col-md-12 title">{{ $value->title }}</h3>
+                            <h3 class="col-md-12 title">{{ Str::words($value->title, 10,'...') }}</h3>
                             <div class="col-md-5 left">
                                 <img class="media-object" src="{{ $value->image }}" alt="...">
                             </div>
 
                             <div class=" col-md-7 right">
-                                <span>{{ $value->description }}</span>
+                                <span>{{ Str::words($value->description, 20,'...') }}</span>
                             </div>
                         </a>
 
@@ -175,12 +175,10 @@
                             <div class="thumbnail">
                                 <img src="{{ $value->image }}" alt="...">
                                 <div class="caption">
-                                    <h3>{{ $value->title }}</h3>
-                                    <p>{{ $value->description }}</p>
+                                    <h3>{{ Str::words($value->title, 15,'...') }}</h3>
+                                    <p>{{ Str::words($value->description, 20, '...') }}</p>
                                 </div>
-                                <div class="bottom">
-                                    <span>Xem chi tiết</span>
-                                </div>
+
                             </div>
                         </a>
                     </div>
