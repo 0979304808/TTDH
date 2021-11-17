@@ -13,7 +13,8 @@
     <title>@yield('title')</title>
 </head>
 <div class="banner">
-    <img src="{{ asset('images/banner.jpg') }}">
+    <h2>Báo đời sống được cập nhật liên tục</h2>
+    <img src="{{ asset('images/banner_2.png') }}">
 </div>
 <nav class="navbar navbar-default header">
     <div class="container-body">
@@ -27,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">TinDoiSong.Tk</a>
+                <a class="navbar-brand header-logo" href="/">TinDoiSong.Tk</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

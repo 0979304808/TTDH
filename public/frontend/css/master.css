@@ -25,11 +25,49 @@ a:focus {
   text-decoration: none;
 }
 
+.header-logo {
+  font-family: cursive;
+}
+
 .banner img {
   width: 100%;
   max-height: 200px;
 }
+.banner h2 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  text-align: center;
+  font-family: cursive;
+  font-size: 50px;
+  top: 50px;
+  animation-name: move;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
 
+@keyframes move {
+  0% {
+    top: 0px;
+    left: 0px;
+    color: red;
+  }
+  10% {
+    top: 0px;
+    left: 400px;
+    color: green;
+  }
+  40% {
+    top: 100px;
+    left: 400px;
+    color: blue;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    color: #8fdf6e;
+  }
+}
 .header {
   position: sticky;
   top: 0;
