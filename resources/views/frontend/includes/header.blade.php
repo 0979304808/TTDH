@@ -12,9 +12,10 @@
 
     <title>@yield('title')</title>
 </head>
-<div class="banner">
+<div class="banner" id="top">
     <h2>Báo đời sống được cập nhật liên tục</h2>
     <img src="{{ asset('images/banner_2.png') }}">
+    <a class="button-top" >Top</a>
 </div>
 <nav class="navbar navbar-default header">
     <div class="container-body">

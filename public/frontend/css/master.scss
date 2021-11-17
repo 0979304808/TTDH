@@ -25,6 +25,19 @@ a {
         text-decoration: none;
     }
 }
+.button-top {
+    position: fixed;
+    right: 40px;
+    bottom: 50px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #9f9f9f;
+    padding: 10px;
+    font-family: -webkit-body;
+    z-index: 99999;
+    cursor: pointer;
+    transition: 1s;
+}
 .header-logo {
     font-family: cursive;
 }
