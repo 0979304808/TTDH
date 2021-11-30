@@ -196,7 +196,7 @@ Trang chủ
 
     <!-- Modal -->
     <div class="modal fade" id="myModal">
-    <div class="baoz123" id="baoz1234">
+        <div class="baoz123" id="baoz1234">
             <center>
                 <div class="contain">
                     <svg onclick="hideFunction()" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -360,9 +360,10 @@ Trang chủ
 </script>
 @endsection
 <style>
-    .modal{
+    .modal {
         z-index: 9999999;
     }
+
     .baoz123 {
         display: none;
     }
@@ -503,16 +504,19 @@ Trang chủ
         border-radius: 10px;
         animation: title-new ease-in 0.2s;
     }
-    @keyframes title-new{
-        from{
+
+    @keyframes title-new {
+        from {
             opacity: 0;
             transform: scale(0);
         }
-        to{
+
+        to {
             opacity: 1;
             transform: scale(1);
         }
     }
+
     .bi-facebook {
         color: blue;
     }
