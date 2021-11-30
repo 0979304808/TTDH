@@ -1,5 +1,5 @@
 <footer>
-    <div class="comment">
+    <div class="footer">
         <div class="footer-right">
             <a href="" class="footter_info">
                 Tổng biên tập: quỳnh đz,hùng, phong.<br>
@@ -51,7 +51,7 @@
         font-size: 20px;
     }
 
-    .comment {
+    .footer {
         margin-top: 50px;
         display: flex;
         background-color: rgb(209, 209, 209);
@@ -78,5 +78,5 @@
         margin-left: 20px;
     }
 
-    
+
 </style>

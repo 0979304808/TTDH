@@ -170,8 +170,21 @@ Route::group([
 
 Route::group(['namespace' => 'FrontEnd'], function () {
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
+    Route::group([
+        'namespace' => 'Auth',
+    ], function (){
+
+        Route::post('/login', 'AuthController@login')->name('frontend.login');
+        Route::post('/register', 'AuthController@register')->name('frontend.register');
+        Route::get('/logout', 'AuthController@logout')->name('frontend.logout');
+    });
+
+
+
+
+    // bài viết
     Route::group([
         'prefix' => 'bai-viet',
      ], function (){
@@ -189,6 +202,21 @@ Route::group(['namespace' => 'FrontEnd'], function () {
         Route::post('create', 'CommentController@create')->name('frontend.comments.create');
         Route::put('update', 'CommentController@update')->name('frontend.comments.update');
     });
+
+    //Community
+    Route::group([
+        'prefix' => 'cong-dong',
+    ], function () {
+        Route::get('/', 'CommunityController@index')->name('frontend.community.index');
+    });
+
+    //Contact
+    Route::group([
+        'prefix' => 've-chung-toi',
+    ], function () {
+        Route::get('/', 'ContactController@index')->name('frontend.contact.index');
+    });
+
 });
 
 

@@ -27,6 +27,8 @@
         });
     });
 </script>
+<script src="{{ asset('frontend/auth.js') }}"></script>
+<script src="{{ asset('frontend/js/notify.min.js') }}"></script>
 @yield('script')
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

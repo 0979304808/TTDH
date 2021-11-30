@@ -34,23 +34,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown"><a href="#"> Thế Giới<span class="sr-only">(current)</span></a>
-                        <ul class="list-news">
-                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>
-                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#">Đời sống</a>
-                        <ul class="list-news">
-                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>
-                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
+
+
+                    <li class="dropdown {{ Request::is('tin-tuc') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin Tức </a>
                         <ul class="list-news">
                             <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>
@@ -58,6 +44,18 @@
                             <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>
                             <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>
                         </ul>
+                    </li>
+
+
+                    <li class="dropdown {{ Request::is('cong-dong') ? 'active' : '' }}"><a href="/cong-dong"> Cộng đồng<span class="sr-only">(current)</span></a>
+{{--                        <ul class="list-news">--}}
+{{--                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>--}}
+{{--                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>--}}
+{{--                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>--}}
+{{--                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>--}}
+{{--                        </ul>--}}
+                    </li>
+                    <li class="dropdown {{ Request::is('ve-chung-toi') ? 'active' : '' }}"><a href="/ve-chung-toi"> Về chúng tôi</a>
                     </li>
                 </ul>
 
@@ -70,8 +68,19 @@
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>
                     </li>
-                    <li class="dropdown"><a href="#" onclick="showFunction()" id="sig-in" data-toggle="modal" data-target="#myModal ">Đăng nhập</a>
-                    </li>
+                    @if(Auth::check())
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                            <ul class="list-news">
+                                <li class="item-news"><a class="title-news" href="#">Thông tin tài khoản</a></li>
+                                <li class="item-news"> <a class="title-news" href="{{ route('frontend.logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                        @else
+                        <li class="dropdown"><a href="#" onclick="showFunction()" id="sig-in" data-toggle="modal" data-target="#myModal ">Đăng nhập</a>
+                        </li>
+                    @endif
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -83,7 +92,7 @@
         position: absolute;
         list-style: none;
         display: none;
-        background-color: #F7F7F7;
+        background-color: #fff;
         width: 165px;
         padding: 6px 6px 10px 6px;
         border-top: solid 2px red;
@@ -110,7 +119,7 @@
         text-align: start;
         font-size: 16px;
         font-weight: 350;
-        
+
     }
     .title-news:hover{
         text-decoration: underline;
@@ -129,6 +138,6 @@
             transform: scale(1);
         }
     }
-    
+
 </style>
 {{--//test--}}

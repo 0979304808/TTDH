@@ -60,6 +60,10 @@ a:focus {
   animation-iteration-count: infinite;
 }
 
+.navbar-default {
+  z-index: 1 !important;
+}
+
 @keyframes move {
   0% {
     top: 0px;
@@ -89,6 +93,10 @@ a:focus {
 }
 .header .container {
   height: auto !important;
+}
+
+.navbar-brand {
+  font-size: 30px;
 }
 
 .row {

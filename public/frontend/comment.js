@@ -23,6 +23,8 @@ $('body').on('click', '.btn-submit-comment', function (){
         },
         success:function(res){
             console.log(res);
+            $('#content_comment').val('');
+            $('#modalComment').modal('show');
             // $('.modal-role-admin').modal('hide');
             // notify('Thêm thành công', 'success');
             // setTimeout(() => {

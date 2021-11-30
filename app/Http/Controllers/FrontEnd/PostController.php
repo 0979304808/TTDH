@@ -21,7 +21,9 @@ class PostController extends Controller
 
     public function detail($slug)
     {
-        $post = Post::with('categories')->whereSlug($slug)->first();
+        $post = Post::with(['categories','comments' => function($query){
+            $query->whereStatus(1)->latest();
+        }, 'user'])->whereSlug($slug)->first();
         $slug = ($post->categories)[0]->slug;
         $listPost = Post::with('categories')->whereHas('categories', function ($query) use ($slug) {
             $query->where('slug', $slug);

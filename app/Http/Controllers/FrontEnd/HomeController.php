@@ -25,12 +25,20 @@ class HomeController extends Controller
 
         $relate = Post::inRandomOrder()->limit(4)->get();
 
+
+
+        $listPostComment = Post::with('comments')->withCount('comments')->limit(5)->get();
+
+        $listPostLike = Post::orderBy('like', 'desc')->limit(5)->get(); ;
+
         $view = view('frontend.home.index');
         $view->with('highlights', $highlights);
         $view->with('post_category', $post_category);
         $view->with('posts_new', $posts_new);
         $view->with('banner', $banner);
         $view->with('relate', $relate);
+        $view->with('listPostLike', $listPostLike);
+        $view->with('listPostComment', $listPostComment);
         return $view;
     }
 }

@@ -10,7 +10,6 @@ body {
 img {
     width: 100%;
 }
-
 a {
     color: #000000;
     text-decoration: none;
@@ -60,6 +59,9 @@ a {
         animation-iteration-count:infinite;
     }
 }
+.navbar-default {
+    z-index: 1 !important;
+}
 @keyframes move{
     0%{
         top:0px;
@@ -93,7 +95,7 @@ a {
     }
 }
 .navbar-brand{
-            font-size:50px;
+            font-size:30px;
         }
 .row{
     margin-right: 0;
@@ -129,7 +131,7 @@ a {
                 padding: 0;
             }
         }
-        
+
         .box-content {
             clear: both;
 
@@ -308,6 +310,7 @@ a {
                 }
             }
             .comment {
+
                 .input-form {
                     margin-bottom: 15px;
                 }
@@ -388,4 +391,7 @@ a {
 
 }
 // test
+
+// code here
+
 
