@@ -7,8 +7,10 @@
 <div class="main">
     @yield('content')
 </div>
+@include('frontend.includes.modal')
 
 @include('frontend.includes.footer')
+@include('includes.partials.params')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     window.onscroll = function(ev) {
@@ -24,8 +26,9 @@
             $('html, body').animate({ scrollTop: 0 }, 600);
         });
     });
-    @yield('script')
 </script>
+@yield('script')
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>

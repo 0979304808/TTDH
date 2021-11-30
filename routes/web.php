@@ -178,8 +178,17 @@ Route::group(['namespace' => 'FrontEnd'], function () {
 
         Route::get('/{slug}', 'PostController@detail');
     });
+
     Route::get('/danh-muc/{slug}', 'PostController@index');
 
+
+    // Comments
+    Route::group([
+        'prefix' => 'fe/comment',
+    ], function () {
+        Route::post('create', 'CommentController@create')->name('frontend.comments.create');
+        Route::put('update', 'CommentController@update')->name('frontend.comments.update');
+    });
 });
 
 

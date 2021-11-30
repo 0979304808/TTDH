@@ -26,6 +26,9 @@ class PostController extends Controller
         $listPost = Post::with('categories')->whereHas('categories', function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->where('id', "!=",$post->id)->inRandomOrder()->limit(3)->get();
+        \JavaScript::put([
+            'link_create_comment' => route('frontend.comments.create')
+        ]);
         $view = view('frontend.post.detail');
         $view->with('post', $post);
         $view->with('listPost', $listPost);

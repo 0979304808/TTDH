@@ -1,4 +1,7 @@
 @extends('frontend.includes.master')
+@section('script')
+    {{ HTML::script('frontend/comment.js') }}
+@endsection
 @section('title')
     Chi tiết bài viết
 @endsection
@@ -27,129 +30,77 @@
                 <div class="comment">
                     <h3>Ý kiến (50)</h3>
                     <form class="form">
-                        <textarea class="input-form form-control" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
-                        <button class="btn btn-primary">Bình luận</button>
+                        @csrf
+                        <input type="hidden" id="post_id" value="{{ $post->id }}">
+                        <textarea class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
+                        <button type="button" class="btn btn-primary btn-submit-comment">Bình luận</button>
                     </form>
-
-
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
+{{--                    {{ dd($post->comments) }}--}}
+                    @foreach($post->comments as $item)
+                        <div class="parent media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading">Media heading</h5>
+                                <p>Bài viết này hay quá</p>
+                                <span>
                                 <a href="#">Trả lời</a>
                             </span>
-                            <span>
+                                <span>
                                 <a href="#">2h trước</a>
                             </span>
 
 
-                            <div class="child">
+                                <div class="child">
 
-                                <div class="parent media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">Media heading</h5>
-                                        <p>Bài viết này hay quá</p>
-                                        <span>
+                                    <div class="parent media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="media-heading">Media heading</h5>
+                                            <p>Bài viết này hay quá</p>
+                                            <span>
                                             <a href="#">Trả lời</a>
                                         </span>
-                                        <span>
+                                            <span>
                                              <a href="#">2h trước</a>
                                         </span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="parent media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">Media heading</h5>
-                                        <p>Bài viết này hay quá</p>
-                                        <span>
+                                    <div class="parent media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="media-heading">Media heading</h5>
+                                            <p>Bài viết này hay quá</p>
+                                            <span>
                                             <a href="#">Trả lời</a>
                                         </span>
-                                        <span>
+                                            <span>
                                              <a href="#">2h trước</a>
                                         </span>
+                                        </div>
                                     </div>
+
+
                                 </div>
 
 
                             </div>
-
-
                         </div>
-                    </div>
+                    @endforeach
 
 
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
 
                     <div class="shore-more text-center">
                         <a style="display: block" href="#">Xem thêm</a>
