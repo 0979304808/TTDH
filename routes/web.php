@@ -109,6 +109,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
                 Route::delete('delete', 'PostController@delete')->name('backend.delete.post');
             });
 
+            // Category
+            Route::group([
+                'prefix' => 'category',
+                'namespace' => 'Categories'
+            ], function () {
+                Route::get('/', 'CategoryController@index')->name('backend.category');
+                Route::post('/create', 'CategoryController@create')->name('backend.category.create');
+            });
+
             // Comments
             Route::group([
                 'prefix' => 'comment',

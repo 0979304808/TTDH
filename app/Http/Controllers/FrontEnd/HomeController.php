@@ -12,14 +12,19 @@ class HomeController extends Controller
     public function index()
     {
         $highlights = Post::orderByDesc('view')->paginate(4);
+
         $posts_new = Post::orderByDesc('created_at')->limit(5)->get();
+
         $banner = Post::where('type', 'post')->whereHas('categories',function ($query){
             $query->where('slug', 'noi-bat');
-        })->orderByDesc('created_at')->get();
+        })->orderByDesc('created_at')->limit(4)->latest()->get();
+
         $post_category = Category::with(['posts' => function($query){
             $query->latest('created_at');
         }])->where('slug','!=', 'noi-bat')->get();
+
         $relate = Post::inRandomOrder()->limit(4)->get();
+
         $view = view('frontend.home.index');
         $view->with('highlights', $highlights);
         $view->with('post_category', $post_category);

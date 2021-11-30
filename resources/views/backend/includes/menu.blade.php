@@ -15,6 +15,9 @@
                     <li class="{{ Request::is('post/detail') ? 'active' : '' }}">
                         <a href="{{ route('backend.posts.detail') }}">Chi tiết bài viết {{ request('post') }}</a>
                     </li>
+                    <li class="{{ Request::is('category') ? 'active' : '' }}">
+                        <a href="{{ route('backend.category') }}">Danh mục</a>
+                    </li>
                 </ul>
             </li>
         </ul>
