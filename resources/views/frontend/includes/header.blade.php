@@ -46,12 +46,12 @@
                     </li>
 
                     <li class="dropdown {{ Request::is('cong-dong') ? 'active' : '' }}"><a href="/cong-dong"> Cộng đồng<span class="sr-only">(current)</span></a>
-{{--                        <ul class="list-news">--}}
-{{--                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>--}}
-{{--                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>--}}
-{{--                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>--}}
-{{--                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>--}}
-{{--                        </ul>--}}
+                        {{-- <ul class="list-news">--}}
+                        {{-- <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>--}}
+                        {{-- <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>--}}
+                        {{-- <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>--}}
+                        {{-- <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>--}}
+                        {{-- </ul>--}}
                     </li>
                     <li class="dropdown {{ Request::is('ve-chung-toi') ? 'active' : '' }}"><a href="/ve-chung-toi"> Về chúng tôi</a>
                     </li>
@@ -67,18 +67,22 @@
                         </form>
                     </li>
                     @if(Auth::check())
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="item-news"><a class="title-news" href="#">Thông tin tài khoản</a></li>
-                                <li class="item-news"> <a class="title-news" href="{{ route('frontend.logout') }}">Logout</a></li>
-                            </ul>
-                        </li>
+                    <li class="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle admin-circle" style="margin: 5.5px -8px;" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="item-news"><a class="title-news" href="#">Thông tin tài khoản</a></li>
+                            <li class="item-news"> <a class="title-news" href="{{ route('frontend.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
 
 
-                        @else
-                        <li class="dropdown"><a href="#" onclick="showFunction()" id="sig-in" data-toggle="modal" data-target="#myModal ">Đăng nhập</a>
-                        </li>
+                    @else
+                    <li class="dropdown"><a href="#" onclick="showFunction()" id="sig-in" data-toggle="modal" data-target="#myModal ">Đăng nhập</a>
+                    </li>
                     @endif
 
                 </ul>
