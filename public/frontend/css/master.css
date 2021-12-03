@@ -334,6 +334,47 @@ a:focus {
 .main .post-detail .box-right .thumbnail .caption h4 {
   font-weight: 600;
 }
+.main .search .input-group {
+  border-radius: 10px;
+}
+.main .search .input-group .form-control {
+  border-radius: 5px 0px 0px 5px;
+  height: 50px;
+}
+.main .search .input-group .btn-default {
+  height: 50px;
+}
+.main .search .title-search {
+  margin-bottom: 50px;
+  position: relative;
+  font-weight: 600;
+}
+.main .search .title-search:after {
+  content: "";
+  position: absolute;
+  border-top: 4px solid #30a953;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  width: 90px;
+  margin: 0 auto;
+}
+.main .search .quick-search ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.main .search .quick-search ul li {
+  list-style: none;
+  background: #fff;
+  margin-right: 10px;
+}
+.main .search .quick-search ul li a {
+  display: block;
+  padding: 10px;
+  color: #6c757d;
+  box-shadow: 1px 1px 5px 1px #c6c6c6;
+}
 
 .footer {
   border-top: 2px solid #e0e0e0;

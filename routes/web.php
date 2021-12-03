@@ -217,6 +217,14 @@ Route::group(['namespace' => 'FrontEnd'], function () {
         Route::get('/', 'ContactController@index')->name('frontend.contact.index');
     });
 
+    //search
+
+    Route::group([
+        'prefix' => 'tim-kiem',
+    ], function () {
+        Route::get('/', 'SearchController@search')->name('frontend.search.index');
+    });
+
 });
 
 

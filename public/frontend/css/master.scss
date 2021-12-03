@@ -378,6 +378,56 @@ a {
 
     // ----------- End Post Detail ---------
 
+    // ------------- Search -------------------
+    .search {
+        .input-group {
+            border-radius: 10px;
+            .form-control {
+                border-radius: 5px 0px 0px 5px;
+                height: 50px;
+            }
+            .btn-default {
+                height: 50px;
+            }
+        }
+        .title-search {
+            margin-bottom: 50px;
+            position: relative;
+            font-weight: 600;
+            &:after {
+                content: "";
+                position: absolute;
+                border-top: 4px solid #30a953;
+                bottom: -15px;
+                left: 0;
+                right: 0;
+                width: 90px;
+                margin: 0 auto;
+            }
+        }
+        .quick-search {
+            ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                li {
+                    list-style: none;
+                    background: #fff;
+
+                    margin-right: 10px;
+                    a {
+                        display: block;
+                        padding: 10px;
+                        color: #6c757d;
+                        box-shadow: 1px 1px 5px 1px #c6c6c6;
+                    }
+
+                }
+            }
+        }
+    }
+    // ------------- End search -------------------
+
 
 }
 
