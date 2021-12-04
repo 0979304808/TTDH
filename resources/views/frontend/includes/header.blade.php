@@ -84,10 +84,9 @@
 
                 </ul>
 
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </div>
 </nav>
 
 
-{{--//test--}}
