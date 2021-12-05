@@ -1,5 +1,5 @@
 body {
-    font-family: Roboto, Sans-Serif;
+    font-family: "Merriweather",serif;
     background: #F7F7F7;
 }
 .container-body {
@@ -12,13 +12,25 @@ body {
 img {
     width: 100%;
 }
+span, p {
+    font-family: cursive;
+}
+button {
+    &:hover {
+        background: red;
+    }
+    &:focus {
+        outline: none;
+    }
+}
 a {
     color: #000000;
     text-decoration: none;
+    transition: 0.3s;
 
     &:hover {
         opacity: 0.8;
-        color: #000000;
+        color: #9f224e;
         text-decoration: none;
     }
 
@@ -38,9 +50,11 @@ a {
     z-index: 99999;
     cursor: pointer;
     transition: 1s;
+    font-weight: 600;
+
 }
 .header-logo {
-    font-family: cursive;
+    font-family: cursive !important;
 }
 
 .banner {
@@ -68,7 +82,7 @@ a {
     0%{
         top:0px;
         left:0px;
-        color: red;
+        color: #9f224e;
     }
     10%{
         top:0px;
@@ -94,6 +108,10 @@ a {
 
     .container {
         height: auto !important;
+    }
+    a {
+        font-family: cursive;
+
     }
 }
 .navbar-brand{
@@ -126,6 +144,9 @@ a {
             .box-right {
                 h3 {
                     font-weight: 600;
+                    &:hover {
+                        color: #9f224e;
+                    }
                 }
             }
 
@@ -153,6 +174,11 @@ a {
                         margin-top: -4px;
                         padding: 0 15px 15px 15px;
                     }
+                    .title {
+                        &:hover {
+                            color: #9f224e;
+                        }
+                    }
 
                     h3 {
                         font-size: 20px;
@@ -165,7 +191,7 @@ a {
                         &:before {
                             content: "";
                             width: 20%;
-                            border-top: 4px solid red;
+                            border-top: 4px solid #9f224e;
                             position: absolute;
                             bottom: 0;
                         }
@@ -174,6 +200,11 @@ a {
             }
             .content-right {
                 padding-right: 0;
+                .view-all-post {
+                    a {
+                        color: #9f224e;
+                    }
+                }
                 .box-content {
                     background: #fff;
                     padding: 20px;
@@ -186,6 +217,9 @@ a {
                             .media-heading {
                                 font-weight: 600;
                                 font-size: 21px;
+                                &:hover {
+                                    color: #9f224e;
+                                }
                             }
                         }
                     }
@@ -198,7 +232,7 @@ a {
                         font-weight: 600;
                         &:before {
                             content: "";
-                            border-top: 3px solid red;
+                            border-top: 3px solid #9f224e;
                             width: 100%;
                             position: absolute;
                             bottom: 0;
@@ -213,7 +247,19 @@ a {
 
         .box-highlights {
             background: #fff;
-            title {
+            strong {
+                font-size: 35px;
+                padding: 0 15px;
+            }
+            .title-top {
+                color: #9f224e;
+            }
+            h4 {
+                &:hover {
+                    color: #9f224e;
+                }
+            }
+            .title {
                 font-weight: 600;
 
             }
@@ -230,7 +276,7 @@ a {
                 }
             }
             ul {
-                padding: 0 20px;
+                padding: 0 ;
                 li {
                     padding: 0 15px;
                     list-style: none;
@@ -240,6 +286,11 @@ a {
 
         .box-relate-to {
             margin-top: 50px;
+            h3 {
+                &:hover {
+                    color: #9f224e;
+                }
+            }
             .thumbnail {
                 border: none;
                 .caption {
@@ -260,7 +311,7 @@ a {
                     &:after {
                         margin: 0 auto;
                         content: '';
-                        border-bottom: 3px solid red;
+                        border-bottom: 3px solid #9f224e;
                         width: 120px;
                         position: absolute;
                         right: 0;
@@ -288,7 +339,7 @@ a {
                 .category {
                     float: left;
                     a {
-                        color: red;
+                        color: #9f224e;
                     }
                 }
                 .date {
@@ -317,6 +368,20 @@ a {
                     margin-bottom: 15px;
                 }
                 .parent {
+                    .action {
+                        float: right;
+                        a {
+                            &:hover {
+                                color: #9f224e;
+                            }
+                        }
+                    }
+                    .media-heading {
+                        float: left;
+                    }
+                    p {
+                        clear: both;
+                    }
                     .media-left {
                         img {
                             width: 40px;
@@ -365,6 +430,7 @@ a {
                 margin: 0 0 20px;
                 padding: 0;
                 font-weight: 600;
+                color: #9f224e;
             }
             .thumbnail {
                 border: none;
@@ -372,6 +438,11 @@ a {
                     h4 {
                         font-weight: 600;
                     }
+                }
+            }
+            h4 {
+                &:hover {
+                    color: #9f224e;
                 }
             }
         }
@@ -392,14 +463,20 @@ a {
                 height: 50px;
             }
         }
+        button {
+            &:focus {
+                outline: none;
+            }
+        }
         .title-search {
             margin-bottom: 50px;
             position: relative;
             font-weight: 600;
+
             &:after {
                 content: "";
                 position: absolute;
-                border-top: 4px solid #30a953;
+                border-top: 4px solid #9f224e;
                 bottom: -15px;
                 left: 0;
                 right: 0;
@@ -411,12 +488,13 @@ a {
             ul {
                 margin: 0;
                 padding: 0;
-                display: flex;
                 li {
                     list-style: none;
                     background: #fff;
+                    display: inline-block;
 
                     margin-right: 10px;
+                    margin-bottom: 10px;
                     a {
                         display: block;
                         padding: 10px;
@@ -430,15 +508,74 @@ a {
     }
     // ------------- End search -------------------
 
+    // ---------- list-post-category -------
+    .list-post-category {
+        font-family: "Merriweather",serif;
+        .title-category {
+            color: #9f224e;
+        }
+        .banner-category {
+            background-color: #e3e3e3;
+            .media-body {
+                padding: 15px 15px;
+            }
+        }
+        .box-baner {
+            padding: 0;
+        }
+        .title-category-relate {
+            color: #000000;
+            position: relative;
+            float: left;
+            padding-bottom: 2px;
+            margin-top: 0;
+            &:before{
+                content: "";
+                border-top: 1px solid #9f224e;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+            }
+        }
+        .box-left {
+            border-right: 1px solid #d0d0d0;
+        }
+    }
+
+    // -------- END list-post-category ----------
+
 
 }
-
+#search-icon {
+    width: 75%;
+}
 .footer {
     border-top: 2px solid #e0e0e0;
     clear: both;
     min-height: 100px;
+    background: #fff;
+    a {
+        font-family: system-ui;
+    }
+    h3 {
+        font-weight: 600;
+    }
     h4 {
         line-height: 100px;
+    }
+    .container-footer {
+        max-width: 1500px;
+        margin: 0 auto;
+        margin-top: 50px;
+        margin-bottom: 70px;
+        ul {
+            padding: 0;
+            margin: 0;
+            li {
+                list-style: none;
+            }
+        }
+
     }
 
 }
@@ -446,4 +583,16 @@ a {
 
 // code here
 
-
+@media only screen and (max-width: 768px) {
+    .banner-category {
+        .media-left {
+            padding: 0;
+        }
+    }
+    #search-icon {
+        width: 5%;
+    }
+    .banner {
+        display: none;
+    }
+}

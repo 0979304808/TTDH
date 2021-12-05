@@ -13,15 +13,19 @@ class HomeController extends Controller
     {
         $highlights = Post::orderByDesc('view')->paginate(4);
 
-        $posts_new = Post::orderByDesc('created_at')->limit(5)->get();
+        $posts_new = Post::latest()->limit(5)->get();
+        $id = Post::latest()->limit(5)->pluck('id');
 
         $banner = Post::where('type', 'post')->whereHas('categories',function ($query){
+            $query->orderBy('post_category.created_at', 'ASC');
             $query->where('slug', 'noi-bat');
         })->orderByDesc('created_at')->limit(4)->latest()->get();
 
-        $post_category = Category::with(['posts' => function($query){
-            $query->latest('created_at');
-        }])->where('slug','!=', 'noi-bat')->get();
+        $post_category = Category::with(['posts' => function($query) use ($id){
+            $query->latest();
+            $query->whereNotIn('post_id', $id);
+        }])->whereHas('posts')->where('slug','!=', 'noi-bat')->get();
+
 
         $relate = Post::inRandomOrder()->limit(4)->get();
 

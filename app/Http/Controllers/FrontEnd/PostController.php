@@ -14,8 +14,14 @@ class PostController extends Controller
     public function index($slug)
     {
         $category = Category::where('slug', $slug)->first();
+        $posts = Post::whereHas('categories', function ($query) use ($slug){
+            $query->where('slug', $slug);
+        })->latest()->paginate();
+        $categories = Category::with('posts')->where('slug', '!=', $slug)->whereHas('posts')->inRandomOrder()->limit(3)->latest()->get();
         $view = view('frontend.post.listPost');
         $view->with('category',$category);
+        $view->with('posts',$posts);
+        $view->with('categories',$categories);
         return $view;
     }
 

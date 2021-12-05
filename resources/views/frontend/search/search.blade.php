@@ -30,7 +30,20 @@
                     @if(request('q'))
                         <h2>Kết quả ({{ count($posts) }})</h2>
                         @foreach($posts as $post)
-                            {{ $post->title }}
+                            <div class="media">
+                                <div class="media-left" style="width: 30%">
+                                    <a href="/bai-viet/{{ $post->slug }}">
+                                        <img class="media-object" src="{{ $post->image }}" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="/bai-viet/{{ $post->slug }}">
+                                        <h3 class="media-heading">{{ $post->title }}</h3>
+                                    </a>
+                                    {{ $post->description }}
+                                </div>
+                            </div>
+                            <hr style="border-top: 1px solid #d0d0d0">
                         @endforeach
                     @endif
                 </div>

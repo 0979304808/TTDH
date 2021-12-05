@@ -60,7 +60,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="/tim-kiem" >
-                            <img style="width: 75% !important;" src="{{ asset('/images/search.png') }}">
+                            <img id="search-icon"  src="{{ asset('/images/search.png') }}">
                         </a>
                     @if(Auth::check())
                     <li class="dropdown">

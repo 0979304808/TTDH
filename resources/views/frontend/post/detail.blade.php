@@ -14,7 +14,7 @@
                     <span class="category">
                         <a href="/danh-muc/{{ ($post->categories)[0]->slug }}">{{ ($post->categories)[0]->name }}</a>
                     </span>
-                    <span class="date">{{ $post->created_at->format('H:s d-m-Y') }}</span>
+                    <span class="date">{{ $post->created_at->format('H:s / d-m-Y') }}</span>
                 </div>
                 <h2 class="title">{{ $post->title }}</h2>
                 <div class="description">
@@ -28,7 +28,7 @@
                 </div>
                 <hr>
                 <div class="comment">
-                    <h3>Ý kiến ({{ count($post->comments) }})</h3>
+                    <h3><strong>Ý kiến</strong> ({{ count($post->comments) }})</h3>
                     <form class="form">
                         @csrf
                         <input type="hidden" id="post_id" value="{{ $post->id }}">
@@ -39,7 +39,9 @@
                         @endif
                         <button type="button" class="btn btn-primary btn-submit-comment">Bình luận</button>
                     </form>
+
                     @foreach($post->comments as $item)
+
                         <div class="parent media">
                             <div class="media-left">
                                 <a href="#">
@@ -48,13 +50,26 @@
                             </div>
                             <div class="media-body">
                                 <h5 class="media-heading">{{ $item->user->name }}</h5>
+
+                                @if(Auth::id() == $item->user_id)
+                                    <div class="action">
+                                        <span>
+                                        <a href="#">Sửa</a>
+                                    </span>
+                                        <span>
+                                        <a href="{{ route('backend.comments.delete', $item->id) }}">Xóa</a>
+                                    </span>
+                                    </div>
+                                @endif
+
                                 <p>{{ $item->content }}</p>
                                 <span>
-                                <a href="#">Trả lời</a>
-                            </span>
+                                    <a href="#">Trả lời</a>
+                                </span>
                                 <span>
-                                <a >{{ $item->created_at->diffForHumans() }}</a>
-                            </span>
+                                    <a >{{ $item->created_at->diffForHumans() }}</a>
+                                </span>
+
 
 
                                 <div class="child">

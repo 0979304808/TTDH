@@ -18,7 +18,7 @@ class SearchController extends Controller
 
     public function search(){
         $data = $this->crawler(self::url);
-        $tags = $data->filter('.bm_II .tag-item')->each(function ($node){
+        $tags = $data->filter('#content-main .tag-item')->each(function ($node){
             return $node->text();
         });
         $view = view('frontend.search.search');
