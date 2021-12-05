@@ -1,8 +1,8 @@
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+// $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+// });
 
 $('body').on('click', '.btn-submit-comment', function (){
 
@@ -22,14 +22,10 @@ $('body').on('click', '.btn-submit-comment', function (){
             _method: 'POST'
         },
         success:function(res){
-            console.log(res);
             $('#content_comment').val('');
             $('#modalComment').modal('show');
             // $('.modal-role-admin').modal('hide');
-            // notify('Thêm thành công', 'success');
-            // setTimeout(() => {
-            //     window.location.reload(1)
-            // }, 1000);
+
         },
         error: function(e){
             // $('.modal-role-admin').modal('hide');

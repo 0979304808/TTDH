@@ -53,7 +53,7 @@
                                 <a href="#">Trả lời</a>
                             </span>
                                 <span>
-                                <a href="#">{{ $item->created_at->diffForHumans() }}</a>
+                                <a >{{ $item->created_at->diffForHumans() }}</a>
                             </span>
 
 

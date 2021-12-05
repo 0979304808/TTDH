@@ -6,13 +6,48 @@
             $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
 
         });
-        var yourArray = [];
-        $('.review').change(function (){
-            $("input:checkbox[name='review']:checked").each(function(){
-                yourArray.push($(this).val());
-                console.log(yourArray);
+        var data = [];
+        $('.review, #selectAll').change(function (){
+            var id = [];
+            $("input:checkbox[name='review[]']:checked").each(function(){
+                id.push($(this).val());
             });
+            data = id;
         });
+
+
+
+        $('.btn-browser-commnet').click(function (){
+            if(data.length === 0 ){
+                alert('Chưa có data')
+                return false;
+            }
+
+            if(confirm('Bạn có chắc chắc chắn muốn duyệt?')){
+                $.ajax({
+                    type: 'POST',
+                    url: link_reviewAll_comment,
+                    data: {
+                        _method: 'POST',
+                        id: data,
+                        status : 1
+                    },
+                    success:function(res){
+                        console.log(res)
+                        $.notify('Duyệt thành công', 'success');
+                        setTimeout(() => {
+                            window.location.reload(1)
+                        }, 1000);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            }
+
+
+        })
+
 
 
     </script>
@@ -46,6 +81,9 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
+                <div>
+                    <button class="btn btn-info btn-browser-commnet">Duyệt</button>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped jambo_table">
                         <thead>
@@ -73,19 +111,19 @@
                                 <td class="text-center">{{ $comment->parent ? $comment->parent->content : 'Chưa có'  }}</td>
                                 <td class="text-center">
                                     @if($comment->status == 0 )
-                                        <span class="badge badge-primary">Chưa duyệt</span>
+                                        <span style="background-color: #f0ad4e" class="badge badge-primary">Chưa duyệt</span>
                                     @else
-                                        <span class="badge badge-info">Đã duyệt</span>
+                                        <span style="background-color: #5bc0de" class="badge badge-info">Đã duyệt</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
                                     @if($comment->status == 0 )
-                                        <a class="btn btn-info" href="{{ route('backend.comments.review', ['status' => 1, 'id' => $comment->id]) }}">Duyệt</a>
+                                        <a class="btn btn-info" href="{{ route('backend.comments.review', ['status' => 1, 'id' => $comment->id ]) }}">Duyệt</a>
                                     @else
                                         <a class="btn btn-warning" href="{{ route('backend.comments.review', ['status' => 0, 'id' => $comment->id]) }}">Bỏ duyệt</a>
                                     @endif
                                     <a class="btn btn-success" href="#">Sửa</a>
-                                    <a class="btn btn-danger" href="#">Xóa</a>
+                                    <a class="btn btn-danger" href="{{ route('backend.comments.delete', $comment->id) }}">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -93,7 +131,7 @@
                         </tbody>
                     </table>
                     <div class="text-center">
-{{--                        {!! $posts->appends(['category' => request('category'),'author' => request('author'),'search'=>request('search')])->links() !!}--}}
+                        {!! $comments->links() !!}
                     </div>
                 </div>
             </div>

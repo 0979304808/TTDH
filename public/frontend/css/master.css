@@ -8,6 +8,10 @@ body {
   max-width: 1500px;
 }
 
+.dropdown-menu {
+  border: none;
+}
+
 img {
   width: 100%;
 }

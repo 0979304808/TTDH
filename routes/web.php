@@ -130,6 +130,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
                 Route::post('create', 'CommentController@create')->name('backend.comments.create');
                 Route::put('update', 'CommentController@update')->name('backend.comments.update');
                 Route::get('review/{status}/{id}', 'CommentController@review')->name('backend.comments.review');
+                Route::post('reviewAll', 'CommentController@reviewAll')->name('backend.comments.reviewAll');
+                Route::get('comment/delete/{id}', 'CommentController@delete')->name('backend.comments.delete');
             });
 
             // test

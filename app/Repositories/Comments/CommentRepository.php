@@ -15,4 +15,8 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
         parent::__construct($comment);
         $this->model = $comment;
     }
+
+    public function fisrtAll(array $attributes){
+        return $this->model->whereIn('id',$attributes);
+    }
 }

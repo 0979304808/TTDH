@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackEnd\Comments;
 
+use App\Models\Comments\Comment;
 use App\Repositories\Comments\Contract\CommentRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,16 +52,37 @@ class CommentController extends Controller
 
     public function review($status, $id)
     {
-
-
-
-
         $comment = $this->comment->find($id);
         if ($comment){
             if (!check_spam($comment->content)){
                 $comment->update(['status' => $status]);
                 return redirect()->back()->with('Thành công');
             }
+        }
+        return redirect()->back()->with('Thất bại');
+    }
+
+    public function reviewAll(Request $request){
+        $data = $request->only(['status', 'id']);
+        $comments = $this->comment->fisrtAll($data['id'])->update(['status' => $data['status']]);
+        if ($comments){
+            return response()->json('Thành công', 200);
+        }
+        return response()->json('Thất bại', 404);
+    }
+
+    public function delete($id){
+        $comment = Comment::find($id)->delete();
+        if ($comment){
+            return redirect()->back()->with('Thành công');
+        }
+        return redirect()->back()->with('Thất bại');
+    }
+
+    public function deleteAll(array $id){
+        $comment = Comment::whereIn([1,2,3,4])->delete();
+        if ($comment){
+            return redirect()->back()->with('Thành công');
         }
         return redirect()->back()->with('Thất bại');
     }
