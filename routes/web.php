@@ -82,7 +82,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             // Profile
             Route::group([
                 'prefix' => 'profile',
-                'namespace' => 'Profile'
+                'namespace' => 'Profile',
+                'middleware' => ['role:administrator|visitor|manager|editor']
             ], function () {
                 Route::group([
                     'prefix' => '{user}',
@@ -98,13 +99,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             // Posts
             Route::group([
                 'prefix' => 'post',
-                'namespace' => 'Posts'
+                'namespace' => 'Posts',
+                'middleware' => ['role:administrator|visitor|manager|editor']
             ], function () {
                 Route::get('/', 'PostController@index')->name('backend.posts');
                 Route::get('create', 'PostController@create')->name('backend.posts.create');
                 Route::post('create', 'PostController@store')->name('backend.posts.store');
                 Route::put('update', 'PostController@update')->name('backend.posts.update');
                 Route::get('detail', 'PostController@detail')->name('backend.posts.detail');
+                Route::get('/review/comment/{slug}', 'PostController@reviewComment')->name('backend.posts.review.comment');
                 Route::put('catpost', 'PostController@UpdateCatePost')->name('backend.update.categories.post');
                 Route::delete('delete', 'PostController@delete')->name('backend.delete.post');
             });
@@ -112,7 +115,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             // Category
             Route::group([
                 'prefix' => 'category',
-                'namespace' => 'Categories'
+                'namespace' => 'Categories',
+                'middleware' => ['role:administrator']
             ], function () {
                 Route::get('/', 'CategoryController@index')->name('backend.category');
                 Route::post('/create', 'CategoryController@create')->name('backend.category.create');
@@ -125,6 +129,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             ], function () {
                 Route::post('create', 'CommentController@create')->name('backend.comments.create');
                 Route::put('update', 'CommentController@update')->name('backend.comments.update');
+                Route::get('review/{status}/{id}', 'CommentController@review')->name('backend.comments.review');
             });
 
             // test

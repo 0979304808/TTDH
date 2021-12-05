@@ -8,6 +8,8 @@ interface PostRepositoryInterface extends BaseRepositoryInterface
 {
     public function whereCatAuthor($category, $author);
 
+    public function whereSlugPost($slug);
+
     public function searchAll($search);
 
     public function ListPost($id);

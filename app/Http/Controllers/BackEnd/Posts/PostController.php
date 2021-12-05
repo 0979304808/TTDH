@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd\Posts;
 
 use App\Core\Traits\ApiResponser;
 use App\Core\Traits\UploadTable;
+use App\Models\Comments\Comment;
 use App\Models\Posts\Post;
 use App\Repositories\Categories\CategoryRepository;
 use App\Repositories\Posts\Contract\PostRepositoryInterface;
@@ -138,8 +139,18 @@ class PostController extends Controller
     public function delete()
     {
         $id = request('id');
-        if ($this->post->find($id)->delete()){
+        if ($this->post->find($id)->delete()) {
             return $this->success('Thành công', 200);
         }
+    }
+
+    public function reviewComment($slug)
+    {
+        $post = $this->post->whereSlugPost($slug);
+        $comments = Comment::where('post_id', $post->id)->get();
+        $view = view('backend.posts.reviewComment');
+        $view->with('post', $post);
+        $view->with('comments', $comments);
+        return $view;
     }
 }
