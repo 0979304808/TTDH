@@ -1,6 +1,9 @@
 body {
-  font-family: "Merriweather", serif;
   background: #F7F7F7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Merriweather", serif;
 }
 
 .container-body {
@@ -14,10 +17,6 @@ body {
 
 img {
   width: 100%;
-}
-
-span, p {
-  font-family: cursive;
 }
 
 button:hover {
@@ -110,9 +109,6 @@ a:focus {
 }
 .header .container {
   height: auto !important;
-}
-.header a {
-  font-family: cursive;
 }
 
 .navbar-brand {
@@ -471,6 +467,17 @@ a:focus {
 }
 .main .list-post-category .box-left {
   border-right: 1px solid #d0d0d0;
+}
+.main .profile .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.main .profile .box-content {
+  margin-bottom: 50px;
+}
+.main .profile .box-content .title-content {
+  margin-top: 0;
 }
 
 #search-icon {

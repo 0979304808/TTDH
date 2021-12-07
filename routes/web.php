@@ -232,6 +232,16 @@ Route::group(['namespace' => 'FrontEnd'], function () {
         Route::get('/', 'SearchController@search')->name('frontend.search.index');
     });
 
+    //profile
+
+    Route::group([
+        'prefix' => 'profile',
+    ], function () {
+        Route::get('/{id}', 'ProfileController@index')->name('frontend.profile.index');
+    });
+
+
+
 });
 
 
