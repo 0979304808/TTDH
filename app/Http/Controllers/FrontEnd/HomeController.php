@@ -15,9 +15,9 @@ class HomeController extends Controller
         $posts_new = Post::orderByDesc('created_at')->limit(5)->get();
         $banner = Post::where('type', 'post')->whereHas('categories',function ($query){
             $query->where('slug', 'noi-bat');
-        })->orderByDesc('created_at')->get();
+        })->latest()->limit(3)->get();
         $post_category = Category::with(['posts' => function($query){
-            $query->latest('created_at');
+            $query->latest();
         }])->where('slug','!=', 'noi-bat')->get();
         $relate = Post::inRandomOrder()->limit(4)->get();
         $view = view('frontend.home.index');
