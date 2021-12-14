@@ -79,7 +79,7 @@
 
 
                     @else
-                    <li class="dropdown"><a href="#" onclick="showFunction()" id="sig-in" data-toggle="modal" data-target="#myModal ">Đăng nhập</a>
+                    <li class="dropdown"><a href="#"  id="sig-in" data-toggle="modal" data-target="#my-Modal">Đăng nhập</a>
                     </li>
                     @endif
 
