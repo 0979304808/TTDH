@@ -11,6 +11,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <div class="banner" id="top">
     <h2>Báo đời sống được cập nhật liên tục</h2>

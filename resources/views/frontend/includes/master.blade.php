@@ -11,7 +11,6 @@
 
 @include('frontend.includes.footer')
 @include('includes.partials.params')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     window.onscroll = function(ev) {
         if ((window.innerHeight + window.scrollY) >= window.innerHeight + 1) {

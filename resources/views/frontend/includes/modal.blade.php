@@ -20,8 +20,62 @@
 
 
 
+<!-- Modal Login, Register -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#my-Modal">
+  Launch demo modal
+</button>
+
 <!-- Modal -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="my-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body auth-login">
+        <h2 class="text-center" style="font-weight:600">Xin chào</h2>
+        <h4  class="text-center title-h4">Đăng nhập để tiếp tục trải nghiệm được trọn vẹn hơn nhé!</h4>
+        <div class="form-group input-group-lg">
+            <input class="form-control input-login" type="text" placeholder="Tài khoản">
+        </div>
+        <div class="form-group input-group-lg">
+            <input class="form-control input-login" type="password" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group input-group-lg">
+            <input style="vertical-align: top" type="checkbox" id="remember">
+            <label for="remember">Nhớ tôi</label>
+            <a href="#" class="forgot-password"><strong>Quên mật khẩu?</strong></a>
+        </div>
+        <div class="form-group input-group-lg">
+            <button class="form-control btn-primary">Đăng nhập</button>
+        </div>
+        <div class="">
+            <h4 class="text-center">hoặc đăng nhập bằng</h4>
+            <h4 class="text-center mt-5">Bạn chưa có tài khoản? <strong>Đăng ký ngay!</strong></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    #my-Modal {
+        
+    }
+    .auth-login {
+        padding: 50px;
+    }
+    .title-h4 {
+        margin-bottom: 40px;
+    }
+    .input-login {
+        font-size: 15px !important;
+    }
+    .forgot-password {
+        float: right;
+    }
+</style>
+
+
+
+<!-- <div class="modal fade" id="myModal">
     <div class="baoz123" id="baoz1234">
         <center>
             <div class="contain">
@@ -43,7 +97,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z" />
                         </svg><input class="pass-sig-in" id="password" type="password" placeholder="Mật khẩu">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye btn-show-pass" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                         </svg>
@@ -73,7 +127,7 @@
                             </button>
                         </li>
                     </ul>
-                    <p>bạn chưa có tài khoản?<a style="text-decoration: none; cursor: pointer;" onclick="nextFunction()"> Đăng kí ngay!</a> </p>
+                    <p>bạn chưa có tài khoản?<a style="text-decoration: none; cursor: pointer; font-weight:600" onclick="nextFunction()"> Đăng kí ngay!</a> </p>
                 </div>
             </div>
         </center>
@@ -107,7 +161,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z" />
                         </svg><input class="pass-sig-in" type="password" id="password_register" placeholder="Mật khẩu">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye btn-show-pass" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                         </svg>
@@ -116,7 +170,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z" />
                         </svg><input class="pass-sig-in" type="password" id="password_register_re" placeholder="Nhập lại mật khẩu">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onclick="MyFunction()" class="bi bi-eye btn-show-pass" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                         </svg>
@@ -153,8 +207,17 @@
             </div>
         </center>
     </div>
-</div>
+</div> -->
 <script>
+
+    $(document).ready(function(){
+        $('.btn-show-pass').click(function(){
+            var type =  $(this).prev().attr('type');
+            $(this).prev().attr('type', type === 'password' ? 'text' : 'password')
+            
+        });
+    }); 
+
     function hideFunction() {
         $('#myModal').modal('hide');
     }
@@ -178,14 +241,7 @@
         document.getElementById("baoz1234").style.display = "block";
     }
 
-    function MyFunction() {
-        var x = document.getElementById("myInput");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
+
 </script>
 <style>
     .modal {
