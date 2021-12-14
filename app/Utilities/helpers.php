@@ -144,3 +144,13 @@ if(!function_exists('curl_get')){
 		return json_decode($response);
     }
 }
+
+if (!function_exists('check_spanm')){
+    function check_spam($content){
+        $pattern = "/chó|chết/i";
+        if( preg_match($pattern, $content) != 0 ){
+            return true;
+        }
+        return false;
+    }
+}

@@ -150,7 +150,7 @@ html , body{
     min-height: 100%;
     width: 70px;
     padding: 0;
-    z-index: 9999;
+    z-index: 999;
     position: absolute
 }
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
@@ -226,7 +226,7 @@ html , body{
     position: absolute;
     top: 0;
     width: 210px;
-    z-index: 4000;
+    z-index: 400;
     background: #3E5367;
     display: none
 }
@@ -264,7 +264,7 @@ html , body{
     width: 70%;
     background: #fff;
     margin-left: 15%;
-    z-index: 1000;
+    z-index: 100;
     position: inherit;
     margin-top: 10px;
     border: 1px solid rgba(52, 73, 94, 0.44);
@@ -1520,7 +1520,7 @@ ul.msg_list li a .message {
     position: absolute;
     text-shadow: none;
     top: 100%;
-    z-index: 9998;
+    z-index: 998;
     border: 1px solid #D9DEE4;
     border-top-left-radius: 0;
     border-top-right-radius: 0
@@ -1673,7 +1673,7 @@ span.right {
     position: fixed;
     width: 230px;
     background: #2A3F54;
-	z-index:999;
+	z-index:99;
 }
 .sidebar-footer a {
     padding: 7px 0 3px;
@@ -2113,7 +2113,7 @@ button,
     border-right: 0;
     border-bottom: 0;
     border-top-left-radius: 5px;
-    z-index: 9999;
+    z-index: 999;
     display: none
 }
 .compose .compose-header {
@@ -2700,7 +2700,7 @@ ul.social li {
     height: 12px;
     display: block;
     border: 2px solid #FFF;
-    z-index: 12312;
+    z-index: 1232;
     border-radius: 50%
 }
 .chat .status.online {
@@ -4099,7 +4099,7 @@ ul.verticle_bars li {
     right: 0;
     float: right;
     width: 400px;
-    z-index: 4000;
+    z-index: 400;
     bottom: 0
 }
 ul.notifications {

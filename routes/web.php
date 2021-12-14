@@ -82,7 +82,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             // Profile
             Route::group([
                 'prefix' => 'profile',
-                'namespace' => 'Profile'
+                'namespace' => 'Profile',
+                'middleware' => ['role:administrator|visitor|manager|editor']
             ], function () {
                 Route::group([
                     'prefix' => '{user}',
@@ -98,15 +99,27 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             // Posts
             Route::group([
                 'prefix' => 'post',
-                'namespace' => 'Posts'
+                'namespace' => 'Posts',
+                'middleware' => ['role:administrator|visitor|manager|editor']
             ], function () {
                 Route::get('/', 'PostController@index')->name('backend.posts');
                 Route::get('create', 'PostController@create')->name('backend.posts.create');
                 Route::post('create', 'PostController@store')->name('backend.posts.store');
                 Route::put('update', 'PostController@update')->name('backend.posts.update');
                 Route::get('detail', 'PostController@detail')->name('backend.posts.detail');
+                Route::get('/review/comment/{slug}', 'PostController@reviewComment')->name('backend.posts.review.comment');
                 Route::put('catpost', 'PostController@UpdateCatePost')->name('backend.update.categories.post');
                 Route::delete('delete', 'PostController@delete')->name('backend.delete.post');
+            });
+
+            // Category
+            Route::group([
+                'prefix' => 'category',
+                'namespace' => 'Categories',
+                'middleware' => ['role:administrator']
+            ], function () {
+                Route::get('/', 'CategoryController@index')->name('backend.category');
+                Route::post('/create', 'CategoryController@create')->name('backend.category.create');
             });
 
             // Comments
@@ -116,6 +129,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'BackEnd'], function () {
             ], function () {
                 Route::post('create', 'CommentController@create')->name('backend.comments.create');
                 Route::put('update', 'CommentController@update')->name('backend.comments.update');
+                Route::get('review/{status}/{id}', 'CommentController@review')->name('backend.comments.review');
+                Route::post('reviewAll', 'CommentController@reviewAll')->name('backend.comments.reviewAll');
+                Route::get('comment/delete/{id}', 'CommentController@delete')->name('backend.comments.delete');
             });
 
             // test
@@ -161,15 +177,70 @@ Route::group([
 
 Route::group(['namespace' => 'FrontEnd'], function () {
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
+    Route::group([
+        'namespace' => 'Auth',
+    ], function (){
+
+        Route::post('/login', 'AuthController@login')->name('frontend.login');
+        Route::post('/register', 'AuthController@register')->name('frontend.register');
+        Route::get('/logout', 'AuthController@logout')->name('frontend.logout');
+    });
+
+
+
+
+    // bài viết
     Route::group([
         'prefix' => 'bai-viet',
      ], function (){
 
         Route::get('/{slug}', 'PostController@detail');
     });
+
     Route::get('/danh-muc/{slug}', 'PostController@index');
+
+
+    // Comments
+    Route::group([
+        'prefix' => 'fe/comment',
+    ], function () {
+        Route::post('create', 'CommentController@create')->name('frontend.comments.create');
+        Route::put('update', 'CommentController@update')->name('frontend.comments.update');
+    });
+
+    //Community
+    Route::group([
+        'prefix' => 'cong-dong',
+    ], function () {
+        Route::get('/', 'CommunityController@index')->name('frontend.community.index');
+    });
+
+    //Contact
+    Route::group([
+        'prefix' => 've-chung-toi',
+    ], function () {
+        Route::get('/', 'ContactController@index')->name('frontend.contact.index');
+    });
+
+    //search
+
+    Route::group([
+        'prefix' => 'tim-kiem',
+    ], function () {
+        Route::get('/', 'SearchController@search')->name('frontend.search.index');
+    });
+
+    //profile
+
+    Route::group([
+        'prefix' => 'profile',
+    ], function () {
+        Route::get('/{id}', 'ProfileController@index')->name('frontend.profile.index');
+    });
+
+
 
 });
 

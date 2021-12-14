@@ -1,4 +1,7 @@
 @extends('frontend.includes.master')
+@section('script')
+    {{ HTML::script('frontend/comment.js') }}
+@endsection
 @section('title')
     Chi tiết bài viết
 @endsection
@@ -11,7 +14,7 @@
                     <span class="category">
                         <a href="/danh-muc/{{ ($post->categories)[0]->slug }}">{{ ($post->categories)[0]->name }}</a>
                     </span>
-                    <span class="date">{{ $post->created_at->format('H:s d-m-Y') }}</span>
+                    <span class="date">{{ $post->created_at->format('H:s / d-m-Y') }}</span>
                 </div>
                 <h2 class="title">{{ $post->title }}</h2>
                 <div class="description">
@@ -25,131 +28,83 @@
                 </div>
                 <hr>
                 <div class="comment">
-                    <h3>Ý kiến (50)</h3>
+                    <h3><strong>Ý kiến</strong> ({{ count($post->comments) }})</h3>
                     <form class="form">
-                        <textarea class="input-form form-control" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
-                        <button class="btn btn-primary">Bình luận</button>
+                        @csrf
+                        <input type="hidden" id="post_id" value="{{ $post->id }}">
+                        @if(Auth::check())
+                            <textarea class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
+                            @else
+                            <textarea data-toggle="modal" data-target="#myModal" class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
+                        @endif
+                        <button type="button" class="btn btn-primary btn-submit-comment">Bình luận</button>
                     </form>
 
+                    @foreach($post->comments as $item)
 
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
+                        <div class="parent media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading">{{ $item->user->name }}</h5>
 
-
-                            <div class="child">
-
-                                <div class="parent media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">Media heading</h5>
-                                        <p>Bài viết này hay quá</p>
+                                @if(Auth::id() == $item->user_id)
+                                    <div class="action">
                                         <span>
+                                        <a href="#">Sửa</a>
+                                    </span>
+                                        <span>
+                                        <a href="{{ route('backend.comments.delete', $item->id) }}">Xóa</a>
+                                    </span>
+                                    </div>
+                                @endif
+
+                                <p>{{ $item->content }}</p>
+                                <span>
+                                    <a href="#">Trả lời</a>
+                                </span>
+                                <span>
+                                    <a >{{ $item->created_at->diffForHumans() }}</a>
+                                </span>
+
+
+
+                                <div class="child">
+                                    @foreach($item->childComments as $value)
+                                        <div class="parent media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">{{ $value->user->name }}</h5>
+                                                <p>{{ $value->content }}</p>
+                                                <span>
                                             <a href="#">Trả lời</a>
                                         </span>
-                                        <span>
+                                                <span>
                                              <a href="#">2h trước</a>
                                         </span>
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
 
-                                <div class="parent media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">Media heading</h5>
-                                        <p>Bài viết này hay quá</p>
-                                        <span>
-                                            <a href="#">Trả lời</a>
-                                        </span>
-                                        <span>
-                                             <a href="#">2h trước</a>
-                                        </span>
-                                    </div>
+
+
+
+
                                 </div>
 
 
                             </div>
-
-
                         </div>
-                    </div>
+                    @endforeach
 
 
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="parent media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object" src="{{ asset('images/img.jpg') }}" alt="...">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">Media heading</h5>
-                            <p>Bài viết này hay quá</p>
-                            <span>
-                                <a href="#">Trả lời</a>
-                            </span>
-                            <span>
-                                <a href="#">2h trước</a>
-                            </span>
-                        </div>
-                    </div>
 
                     <div class="shore-more text-center">
                         <a style="display: block" href="#">Xem thêm</a>

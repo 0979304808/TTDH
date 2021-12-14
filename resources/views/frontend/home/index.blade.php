@@ -4,13 +4,12 @@
 @endsection
 @section('content')
     <div class="home container">
-
-
         <div id="carousel-banner" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 @foreach($banner as $key => $value)
-                    <li data-target="#carousel-banner" data-slide-to="{{ $key }}" class="item-o {{ $key == 0 ? 'active' : '' }}"></li>
+                    <li data-target="#carousel-banner" data-slide-to="{{ $key }}"
+                        class="item-o {{ $key == 0 ? 'active' : '' }}"></li>
                 @endforeach
             </ol>
 
@@ -38,8 +37,6 @@
         </div>
 
 
-
-
         <div class="box-content row">
             <div class="content-left col-md-4 row">
 
@@ -57,11 +54,10 @@
                             <div class="col-md-5 left">
                                 <img class="media-object" src="{{ $value->image }}" alt="...">
                             </div>
-
-                            <div class=" col-md-7 right">
-                                <span>{{ Str::words($value->description, 20,'...') }}</span>
-                            </div>
                         </a>
+                        <div class=" col-md-7 right">
+                            <span>{{ Str::words($value->description, 20,'...') }}</span>
+                        </div>
 
 
                     @endforeach
@@ -72,47 +68,30 @@
                     <h3 class="title-top">Nổi bật trong tuần</h3>
                     <hr>
                     <ul>
-                        <h3 class="title-like">Ưa thích nhất</h3>
-                        <li>
-                            <a href="#">
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
+                        <h3 class="title-like">Tin ưa thích nhất</h3>
+                        @foreach($listPostLike as $key => $item)
+                            <li>
+                                <hr>
+                                <a href="/bai-viet/{{ $item->slug }}">
+                                    <h4><strong>{{ $key + 1 }}</strong> {{ $item->title }}</h4>
+                                </a>
+
+                            </li>
+                        @endforeach
                         <hr>
                     </ul>
 
                     <ul>
-                        <h3 class="title-comment">Quan tâm nhất</h3>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <h4>1. Các bài viết mới</h4>
-                            </a>
-                        </li>
+                        <h3 class="title-comment">Tin quan tâm nhất</h3>
+                        @foreach($listPostComment as $key => $item)
+                            <li>
+                                <hr>
+                                <a href="/bai-viet/{{ $item->slug }}">
+                                    <h4><strong>{{ $key + 1 }}</strong> {{ $item->title }}</h4>
+                                </a>
+
+                            </li>
+                        @endforeach
                         <hr>
                     </ul>
                 </div>
@@ -131,7 +110,8 @@
                                 <a href="/danh-muc/{{ $list_post->slug }}">Xem tất cả</a>
                             </div>
                             @if(count($list_post->posts) > 0 )
-                                @foreach($list_post->posts->take(3) as $post)
+                                @foreach($list_post->posts->take(4) as $post)
+
                                     <div class="media box-item">
 
                                         <div class="media-left">
@@ -142,21 +122,24 @@
                                         </div>
                                         <div class="media-body">
                                             <a href="/bai-viet/{{ $post->slug }}">
+
                                                 <h3 class="media-heading">
                                                     {{ $post->title }}
                                                 </h3>
-                                                <span>
+                                            </a>
+
+                                            <span>
                                                 {{ $post->description }}
                                             </span>
-                                            </a>
 
                                         </div>
                                     </div>
 
+
                                 @endforeach
                             @endif
 
-                            <hr>
+                            <hr style="clear: both">
                         </div>
                     @endforeach
 
@@ -168,7 +151,7 @@
 
         <div class="row box-relate-to">
             <div class="col-md-12 title-top">
-                <h3>Các bài viết liên quan</h3>
+                <h3 style="color: #9f224e">Các bài viết liên quan</h3>
             </div>
             @foreach($relate as $key => $value)
 
@@ -191,13 +174,10 @@
             @endforeach
 
 
-
         </div>
-
-
-
 
 
     </div>
 
 @endsection
+

@@ -83,10 +83,15 @@
                                         <i class="fa fa-trash"></i> Xóa
                                     </button>
 
-                                    <a href="{{ route('backend.posts.detail').'?post='.$value->id }}">
+                                    <a href="/bai-viet/{{ $value->slug }}">
                                         <button class="btn btn-sm btn-info "><i class="fa fa-wrench"
                                                                                 aria-hidden="true"></i> Chi tiết bài
                                             viết
+                                        </button>
+                                    </a>
+                                    <a href="{{ route('backend.posts.review.comment', $value->slug) }}">
+                                        <button class="btn btn-sm btn-warning "><i class="fa fa-wrench"
+                                                                                aria-hidden="true"></i>Duyệt bình luận <strong class="text-danger badge">{{ count($value->comments->where('status', 0)) }}</strong>
                                         </button>
                                     </a>
                                 </td>
