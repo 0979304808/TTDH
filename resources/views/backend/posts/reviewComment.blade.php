@@ -73,11 +73,11 @@
                     <input type="text" class="form-control input-search" name="key"
                            placeholder="Nhập id, tên bài viết ..." value="{{ request('search') }}">
                 </div>
-                <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>
+                <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>-->
                 <a href="{{ route('backend.posts') }}">
                     <button class="btn btn-primary pull-right">Tất cả bài viết</button>
-                </a> -->
-                <!-- <hr> -->
+                </a> 
+                <hr>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">

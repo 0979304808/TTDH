@@ -148,7 +148,7 @@ class PostController extends Controller
     public function reviewComment($slug)
     {
         $post = $this->post->whereSlugPost($slug);
-        $comments = Comment::where('post_id', $post->id)->paginate(15);
+        $comments = Comment::where('post_id', $post->id)->orderBy('status', 'ASC')->paginate(15);
         JavaScript::put([
             'link_reviewAll_comment' => route('backend.comments.reviewAll')
         ]);
