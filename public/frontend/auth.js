@@ -5,7 +5,7 @@ $.ajaxSetup({
 });
 
 //login
-$('body').on('click','.btn-login',function (){
+$('body').on('click','.btn-login-submit',function (){
     var name = $('#name').val();
     var password = $('#password').val();
     var remember = $('#remember:checked').val();
@@ -33,7 +33,7 @@ $('body').on('click','.btn-login',function (){
 })
 
 //register
-$('body').on('click','.btn-register',function (){
+$('body').on('click','.btn-register-submit',function (){
     var username = $('#username').val();
     var email = $('#email').val();
     var password = $('#password_register').val();
