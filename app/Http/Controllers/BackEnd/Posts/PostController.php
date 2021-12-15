@@ -42,6 +42,7 @@ class PostController extends Controller
         $posts = $post->paginate();
         $categories = $this->category->all(['id', 'name']);
         $author = $this->user->ListAdmin();
+        
         JavaScript::put([
             'posts' => $posts,
             'url_list_post' => route('backend.posts'),

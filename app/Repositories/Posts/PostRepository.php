@@ -20,7 +20,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         $post = $this->model->with(['user', 'categories'])->with(["comments" => function($q){
             $q->orderBy('created_at','desc');
-        }]);
+        }])->withCount(['comments' => function($query){
+            $query->where('status', 0);
+        }])->orderBy('comments_count','DESC');
         if ($category != 'all') {
             $post = $post->hasCat($category);
         }
