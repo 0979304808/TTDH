@@ -122,7 +122,6 @@
                                     @else
                                         <a class="btn btn-warning" href="{{ route('backend.comments.review', ['status' => 0, 'id' => $comment->id]) }}">Bỏ duyệt</a>
                                     @endif
-                                    <a class="btn btn-success" href="#">Sửa</a>
                                     <a class="btn btn-danger" href="{{ route('backend.comments.delete', $comment->id) }}">Xóa</a>
                                 </td>
                             </tr>
