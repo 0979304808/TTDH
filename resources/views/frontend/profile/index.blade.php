@@ -9,7 +9,7 @@
         <div class="row">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-pills nav-stacked col-md-3" role="tablist">
+            <ul class="nav nav-pills nav-stacked col-md-3 " role="tablist">
                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin tài khoản</a></li>
                 <li role="presentation"><a href="#community" aria-controls="community" role="tab" data-toggle="tab">Cộng đồng</a></li>
                 <li role="presentation"><a href="#like" aria-controls="like" role="tab" data-toggle="tab">Các bài viết đã thích</a></li>

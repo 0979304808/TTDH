@@ -18,7 +18,7 @@
     <img src="{{ asset('images/banner_2.png') }}">
     <a class="button-top">Top</a>
 </div>
-<nav class="navbar navbar-default header">
+<nav class="navbar navbar-default header nav-top">
     <div class="container-body">
         <div class="container-fluid ">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -97,3 +97,8 @@
 </nav>
 
 
+<style>
+        .nav-top ul li a:hover  {
+            color: #9f224e !important;
+        }
+</style>
