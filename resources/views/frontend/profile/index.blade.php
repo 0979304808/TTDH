@@ -22,7 +22,7 @@
                     <h2 class="title-content">Thông tin tài khoản</h2>
 
                     <div class="text-center">
-                        <img class="avatar" src="{{ $user->image ? $user->image : asset('images/default.png') }}">
+                        <img class="avatar" src="{{ $user->image ? $user->image : asset('images/img.jpg') }}">
                         <h2 class="name">{{ $user->name }}</h2>
 
                     </div>
