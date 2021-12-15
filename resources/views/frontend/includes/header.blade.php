@@ -39,10 +39,10 @@
                     <li class="dropdown {{ Request::is('tin-tuc') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>
-                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/to-am">Tổ ấm</a></li>
+                            <li class="item-news"> <a class="title-news" href="/danh-muc/bai-hoc-song">Bài học sống</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/nha">Nhà</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/tieu-dung">Tiêu dùng</a></li>
                         </ul>
                     </li>
 
