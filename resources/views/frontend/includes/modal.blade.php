@@ -20,10 +20,8 @@
 
 
 
-<!-- Modal Login, Register -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#my-Modal">
-  Launch demo modal
-</button>
+<!-- Modal Login -->
+
 
 <!-- Modal -->
 <div class="modal fade" id="my-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -33,43 +31,121 @@
         <h2 class="text-center" style="font-weight:600">Xin chào</h2>
         <h4  class="text-center title-h4">Đăng nhập để tiếp tục trải nghiệm được trọn vẹn hơn nhé!</h4>
         <div class="form-group input-group-lg">
-            <input class="form-control input-login" type="text" placeholder="Tài khoản">
+            <input class="form-control input-login" type="email" id="name" placeholder="Email">
         </div>
         <div class="form-group input-group-lg">
-            <input class="form-control input-login" type="password" placeholder="Mật khẩu">
+            <input class="form-control input-login" id="password" type="password" placeholder="Mật khẩu">
         </div>
         <div class="form-group input-group-lg">
             <input style="vertical-align: top" type="checkbox" id="remember">
-            <label for="remember">Nhớ tôi</label>
+            <label for="remember" checked value="true">Nhớ tôi</label>
             <a href="#" class="forgot-password"><strong>Quên mật khẩu?</strong></a>
         </div>
         <div class="form-group input-group-lg">
-            <button class="form-control btn-primary">Đăng nhập</button>
+            <button  class="form-control btn-primary btn-login btn-login-submit">Đăng nhập</button >
         </div>
-        <div class="">
+        <div class="login-bottom">
             <h4 class="text-center">hoặc đăng nhập bằng</h4>
-            <h4 class="text-center mt-5">Bạn chưa có tài khoản? <strong>Đăng ký ngay!</strong></h4>
+            <div class="text-center">
+                <a href="#">
+                    <img class="icon-facebook"  src="{{ asset('/images/facebook.png') }}">
+                </a>
+                <a href="#">
+                    <img class="icon-google" src="{{ asset('/images/google.png') }}">
+                </a>
+            </div>
+            <h4 class="text-center mt-5">Bạn chưa có tài khoản?<a  href="#" data-toggle="modal" data-target="#my-Register"> <strong class="btn-login-now">Đăng ký ngay!</strong></a></h4>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- Modal Register -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="my-Register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body auth-login">
+                <h2 class="text-center" style="font-weight:600">Đăng ký thành viên</h2>
+                <h4  class="text-center title-h4">Chào mừng gia nhập cộng đồng người dùng tindoisong.tk!</h4>
+                <div class="form-group input-group-lg">
+                    <input class="form-control input-login" type="text" placeholder="Họ Tên">
+                </div>
+                <div class="form-group input-group-lg">
+                    <input class="form-control input-login" type="text" placeholder="Email">
+                </div>
+                <div class="form-group input-group-lg">
+                    <input class="form-control input-login" type="password" placeholder="Mật khẩu">
+                </div>
+                <div class="form-group input-group-lg">
+                    <input class="form-control input-login" type="password" placeholder="Nhập lại mật khẩu">
+                </div>
+                <div class="form-group input-group-lg" style="display: flex">
+                    <input style="vertical-align: top; margin-right: 10px" type="checkbox" id="remember-register" >
+                    <label style="font-weight: 100" for="remember-register">Bằng việc đăng ký tài khoản, bạn đã đồng ý với các <strong><a href="#">Điều khoản</a></strong> trên website của tindoisong.tk</label>
+                </div>
+                <div class="form-group input-group-lg">
+                    <button  class="form-control btn-primary btn-login btn-register-submit">Đăng ký tài khoản</button >
+                </div>
+                <div class="login-bottom">
+                    <h4 class="text-center">hoặc đăng nhập bằng</h4>
+                    <div class="text-center">
+                        <a href="#">
+                            <img class="icon-facebook"  src="{{ asset('/images/facebook.png') }}">
+                        </a>
+                        <a href="#">
+                            <img class="icon-google" src="{{ asset('/images/google.png') }}">
+                        </a>
+                    </div>
+                    <h4 class="text-center mt-5">Bạn đã có tài khoản?<a  href="#" data-toggle="modal" data-target="#my-Modal"> <strong class="btn-register-now">Đăng nhập ngay!</strong></a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     #my-Modal {
-        
+        font-family: Roboto, sans-serif;
+
     }
     .auth-login {
         padding: 50px;
     }
     .title-h4 {
         margin-bottom: 40px;
+        margin-top: 35px;
+        font-size: 16px;
     }
     .input-login {
         font-size: 15px !important;
     }
     .forgot-password {
         float: right;
+    }
+    .login-bottom {
+        margin-top: 30px;
+    }
+    .login-bottom .icon-facebook,.login-bottom .icon-google {
+        width: 35px;
+        margin: 10px;
+    }
+    .auth-login h2 ,.auth-login h4,.login-bottom h4{
+        font-family: Roboto, sans-serif;
+    }
+    .btn-login {
+        background: #547dbf;
+    }
+    .login-bottom h4 {
+        font-size: 16px;
+    }
+    .btn-login:hover {
+        background: #547dbf;
+        opacity: 0.9;
     }
 </style>
 
@@ -211,12 +287,23 @@
 <script>
 
     $(document).ready(function(){
+
         $('.btn-show-pass').click(function(){
             var type =  $(this).prev().attr('type');
             $(this).prev().attr('type', type === 'password' ? 'text' : 'password')
-            
+
         });
-    }); 
+
+        $('.btn-register-now').click(function (){
+            $('#my-Register').modal('hide');
+        });
+
+        $('.btn-login-now').click(function (){
+            $('#my-Modal').modal('hide');
+        });
+    });
+
+
 
     function hideFunction() {
         $('#myModal').modal('hide');
@@ -228,36 +315,12 @@
         document.getElementById("baoz1234").style.display = "none";
     }
 
-    function nextFunction1() {
 
-        document.getElementById("baoz123").style.display = "none";
-
-        document.getElementById("baoz1234").style.display = "block";
-
-    }
-
-    function showFunction() {
-        document.getElementById("baoz123").style.display = "none";
-        document.getElementById("baoz1234").style.display = "block";
-    }
-
-<<<<<<< HEAD
-
-=======
-    function MyFunction() {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
->>>>>>> 22928d8b37f3d4120197b8c6d52970c2ff36da8b
 </script>
 <style>
     .button:hover{
         background-color: #e0e0e0 !important;
-    
+
     }
     .btn-login-with:hover{
         background-color: #e0e0e0 !important;
@@ -308,7 +371,7 @@
     .button__text {
         font-weight: 700;
         margin: 0 auto;
-       
+
     }
 
     .email-sig-in {
@@ -364,7 +427,7 @@
         transition: .2s;
         font-size: 14px;
     }
-    
+
     .bi-person-circle {
         position: absolute;
         top: 10px;
