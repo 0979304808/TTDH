@@ -18,7 +18,7 @@
     <img src="{{ asset('images/banner_2.png') }}">
     <a class="button-top">Top</a>
 </div>
-<nav class="navbar navbar-default header">
+<nav class="navbar navbar-default header nav-top">
     <div class="container-body">
         <div class="container-fluid ">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,10 +39,10 @@
                     <li class="dropdown {{ Request::is('tin-tuc') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="item-news"><a class="title-news" href="#">Tư Liệu</a></li>
-                            <li class="item-news"> <a class="title-news" href="#">Phân tích</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Người Việt 5 châu</a></li>
-                            <li class="item-news"><a class="title-news" href="#">Cuộc sống đó đây</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/to-am">Tổ ấm</a></li>
+                            <li class="item-news"> <a class="title-news" href="/danh-muc/bai-hoc-song">Bài học sống</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/nha">Nhà</a></li>
+                            <li class="item-news"><a class="title-news" href="/danh-muc/tieu-dung">Tiêu dùng</a></li>
                         </ul>
                     </li>
 
@@ -70,7 +70,10 @@
 {{--                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />--}}
 
 {{--                        </svg>--}}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img style="width: 19px; border-radius: 20px; margin-right: 10px" src="{{ asset('/images/img.jpg') }}">
+                        {{ Auth::user()->name }} 
+                            <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="item-news"><a class="title-news" href="{{ route('frontend.profile.index', Auth::id())  }}">Tài khoản</a></li>
                             <li class="item-news"> <a class="title-news" href="{{ route('frontend.logout') }}">Đăng xuất</a></li>
@@ -79,7 +82,10 @@
 
 
                     @else
-                    <li class="dropdown"><a href="#"  id="sig-in" data-toggle="modal" data-target="#my-Modal">Đăng nhập</a>
+                    <li class="dropdown">
+                        <a href="#"  id="sig-in" data-toggle="modal" data-target="#my-Modal">
+                            Đăng nhập
+                        </a>
                     </li>
                     @endif
 
@@ -91,3 +97,8 @@
 </nav>
 
 
+<style>
+        .nav-top ul li a:hover  {
+            color: #9f224e !important;
+        }
+</style>

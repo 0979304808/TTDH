@@ -37,8 +37,8 @@
             <input class="form-control input-login" id="password" type="password" placeholder="Mật khẩu">
         </div>
         <div class="form-group input-group-lg">
-            <input style="vertical-align: top" type="checkbox" id="remember">
-            <label for="remember" checked value="true">Nhớ tôi</label>
+            <input style="vertical-align: top" type="checkbox" id="remember" checked value="true">
+            <label for="remember" >Nhớ tôi</label>
             <a href="#" class="forgot-password"><strong>Quên mật khẩu?</strong></a>
         </div>
         <div class="form-group input-group-lg">
@@ -73,20 +73,20 @@
                 <h2 class="text-center" style="font-weight:600">Đăng ký thành viên</h2>
                 <h4  class="text-center title-h4">Chào mừng gia nhập cộng đồng người dùng tindoisong.tk!</h4>
                 <div class="form-group input-group-lg">
-                    <input class="form-control input-login" type="text" placeholder="Họ Tên">
+                    <input class="form-control input-login" type="text" id="username" placeholder="Họ Tên">
                 </div>
                 <div class="form-group input-group-lg">
-                    <input class="form-control input-login" type="text" placeholder="Email">
+                    <input class="form-control input-login" type="text" id="email" placeholder="Email">
                 </div>
                 <div class="form-group input-group-lg">
-                    <input class="form-control input-login" type="password" placeholder="Mật khẩu">
+                    <input class="form-control input-login" type="password" id="password_register" placeholder="Mật khẩu">
                 </div>
                 <div class="form-group input-group-lg">
-                    <input class="form-control input-login" type="password" placeholder="Nhập lại mật khẩu">
+                    <input class="form-control input-login" type="password" id="password_register_re" placeholder="Nhập lại mật khẩu">
                 </div>
                 <div class="form-group input-group-lg" style="display: flex">
-                    <input style="vertical-align: top; margin-right: 10px" type="checkbox" id="remember-register" >
-                    <label style="font-weight: 100" for="remember-register">Bằng việc đăng ký tài khoản, bạn đã đồng ý với các <strong><a href="#">Điều khoản</a></strong> trên website của tindoisong.tk</label>
+                    <input style="vertical-align: top; margin-right: 10px" type="checkbox" id="checkbox_re" >
+                    <label style="font-weight: 100" for="checkbox_re">Bằng việc đăng ký tài khoản, bạn đã đồng ý với các <strong><a href="#">Điều khoản</a></strong> trên website của tindoisong.tk</label>
                 </div>
                 <div class="form-group input-group-lg">
                     <button  class="form-control btn-primary btn-login btn-register-submit">Đăng ký tài khoản</button >

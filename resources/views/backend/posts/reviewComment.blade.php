@@ -60,7 +60,7 @@
                 <h2 class="col-md-12 col-xs-12 ">Bài viết : {{ $post->title }} </h2>
                 <hr>
                 <br><br>
-                <div class="form-group col-xs-3">
+                <!-- <div class="form-group col-xs-3">
                     <select class="form-control category" name="category">
                         <option value="all" @if(request('category') == 'all') selected @endif>Tất cả danh mục</option>
                     </select>
@@ -73,10 +73,10 @@
                     <input type="text" class="form-control input-search" name="key"
                            placeholder="Nhập id, tên bài viết ..." value="{{ request('search') }}">
                 </div>
-                <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>
+                <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>-->
                 <a href="{{ route('backend.posts') }}">
                     <button class="btn btn-primary pull-right">Tất cả bài viết</button>
-                </a>
+                </a> 
                 <hr>
                 <div class="clearfix"></div>
             </div>
@@ -122,7 +122,6 @@
                                     @else
                                         <a class="btn btn-warning" href="{{ route('backend.comments.review', ['status' => 0, 'id' => $comment->id]) }}">Bỏ duyệt</a>
                                     @endif
-                                    <a class="btn btn-success" href="#">Sửa</a>
                                     <a class="btn btn-danger" href="{{ route('backend.comments.delete', $comment->id) }}">Xóa</a>
                                 </td>
                             </tr>

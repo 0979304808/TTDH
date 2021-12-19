@@ -28,7 +28,9 @@ class HomeController extends Controller
 
 
 
-        $listPostComment = Post::with('comments')->withCount('comments')->limit(5)->get();
+        $listPostComment = Post::with('comments')->withCount(['comments' => function($query){
+            $query->whereStatus(1);
+        }])->orderBy('comments_count', 'DESC')->limit(5)->get();
 
         $listPostLike = Post::orderBy('like', 'desc')->limit(5)->get(); ;
 

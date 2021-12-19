@@ -42,6 +42,7 @@ class PostController extends Controller
         $posts = $post->paginate();
         $categories = $this->category->all(['id', 'name']);
         $author = $this->user->ListAdmin();
+        
         JavaScript::put([
             'posts' => $posts,
             'url_list_post' => route('backend.posts'),
@@ -147,7 +148,7 @@ class PostController extends Controller
     public function reviewComment($slug)
     {
         $post = $this->post->whereSlugPost($slug);
-        $comments = Comment::where('post_id', $post->id)->paginate(15);
+        $comments = Comment::where('post_id', $post->id)->orderBy('status', 'ASC')->paginate(15);
         JavaScript::put([
             'link_reviewAll_comment' => route('backend.comments.reviewAll')
         ]);
