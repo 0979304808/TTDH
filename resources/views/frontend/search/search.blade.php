@@ -26,21 +26,42 @@
                         @endforeach
                     </ul>
                 </div>
+{{--                <div class="content">--}}
+{{--                    @if(request('q'))--}}
+{{--                        <h2>Kết quả ({{ count($posts) }})</h2>--}}
+{{--                        @foreach($posts as $post)--}}
+{{--                            <div class="media">--}}
+{{--                                <div class="media-left" style="width: 30%">--}}
+{{--                                    <a href="/bai-viet/{{ $post->slug }}">--}}
+{{--                                        <img class="media-object" src="{{ $post->image }}" alt="...">--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body">--}}
+{{--                                    <a href="/bai-viet/{{ $post->slug }}">--}}
+{{--                                        <h3 class="media-heading">{{ $post->title }}</h3>--}}
+{{--                                    </a>--}}
+{{--                                    {{ $post->description }}--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <hr style="border-top: 1px solid #d0d0d0">--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
+{{--                </div>--}}
                 <div class="content">
                     @if(request('q'))
-                        <h2>Kết quả ({{ count($posts) }})</h2>
-                        @foreach($posts as $post)
+                        <h2>Kết quả ({{ count($data) }})</h2>
+                        @foreach($data as $dt)
                             <div class="media">
                                 <div class="media-left" style="width: 30%">
-                                    <a href="/bai-viet/{{ $post->slug }}">
-                                        <img class="media-object" src="{{ $post->image }}" alt="...">
+                                    <a href="{{ isset($dt['slug']) ? '/bai-viet/'.$dt['slug'] : $dt['link']  }}">
+                                        <img class="media-object" src="{{ $dt['image'] ?? '' }}" alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <a href="/bai-viet/{{ $post->slug }}">
-                                        <h3 class="media-heading">{{ $post->title }}</h3>
+                                    <a href="{{ isset($dt['slug']) ? '/bai-viet/'.$dt['slug'] : $dt['link']  }}">
+                                        <h3 class="media-heading">{{ $dt['title'] ?? '' }}</h3>
                                     </a>
-                                    {{ $post->description }}
+                                    {{ $dt['description'] ?? '' }}
                                 </div>
                             </div>
                             <hr style="border-top: 1px solid #d0d0d0">
