@@ -92,7 +92,7 @@ class SearchController extends Controller
                     if ($details) {
                         $content = $this->get_content($details);
                     }
-                    $array = [
+                    return $array = [
                         'title' => $node->filter('a')->count() ? $node->filter('a')->attr('title') : null,
                         'image' => $node->filter('img')->count() ? $node->filter('img')->attr('data-src') : null,
                         'description' => $node->filter('.description')->count() ? $node->filter('.description')->text() : null,
