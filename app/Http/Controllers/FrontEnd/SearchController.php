@@ -40,7 +40,7 @@ class SearchController extends Controller
                     'content' => $post->content,
                 ];
             }
-//            dd($data);
+            dd($data);
             $view->with('data', $data);
         }
         return $view;
