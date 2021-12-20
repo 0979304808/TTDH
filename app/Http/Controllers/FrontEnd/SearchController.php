@@ -29,7 +29,7 @@ class SearchController extends Controller
         $view->with('tags', $tags);
         if ($search = request('q')) {
             $data = $this->crawlerDataSearch(request('q'));
-            $posts = Post::where('title', 'like', '%' . $search . '%')->where('description', 'like', '%' . $search . '%')->paginate();
+            $posts = Post::where('title', 'like', '%' . $search . '%')->where('description', 'like', '%' . $search . '%')->latest()->paginate();
 //            foreach ($posts as $post){
 //                $data[] = [
 //                    'id' => $post->id,
