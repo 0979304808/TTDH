@@ -29,18 +29,18 @@ class SearchController extends Controller
         $view->with('tags', $tags);
         if ($search = request('q')) {
             $data = $this->crawlerDataSearch(request('q'));
-            $posts = Post::where('title', 'like', '%' . $search . '%')->where('description', 'like', '%' . $search . '%')->limit(5)->get();
-            foreach ($posts as $post){
-                $data[] = [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'slug' => $post->slug,
-                    'image' => $post->image,
-                    'description' => $post->description,
-                    'content' => $post->content,
-                ];
-            }
-            $view->with('data', $data);
+            $posts = Post::where('title', 'like', '%' . $search . '%')->where('description', 'like', '%' . $search . '%')->paginate();
+//            foreach ($posts as $post){
+//                $data[] = [
+//                    'id' => $post->id,
+//                    'title' => $post->title,
+//                    'slug' => $post->slug,
+//                    'image' => $post->image,
+//                    'description' => $post->description,
+//                    'content' => $post->content,
+//                ];
+//            }
+            $view->with('posts', $posts);
         }
         return $view;
     }
@@ -56,7 +56,7 @@ class SearchController extends Controller
 
     public function crawlerDataSearch($search)
     {
-        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?q=' . $search];
+        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?q=' . $search, 'https://vov.vn/search?keyword=' . $search . '&field_publish_categories=All&published_date=All'];
         foreach ($urls as $key => $url) {
             $data = $this->crawler($url);
 //            if ($key == 0) {
@@ -66,10 +66,47 @@ class SearchController extends Controller
             if ($key == 1) {
                 $datas = $this->crawlerVnexpress($data);
             }
+            if ($key == 2) {
+                $datas = $this->crawlerVov($data);
+            }
         }
         return $datas;
     }
 
+    public function crawlerVov($data)
+    {
+        $datas = $data->filter('.views-element-container .article-media')->each(function ($node) {
+            $content = $this->get_content_vov($node->filter('a')->attr('href'));
+//            if (str_word_count($node->filter('p')->text()) < 255){
+                $data = [
+                    'title' => $node->filter('.media-title')->count() ? $node->filter('.media-title')->text() : null,
+                    'image' => $node->filter('img')->count() ? $node->filter('img')->attr('src') : null,
+                    'description' => $node->filter('p')->count() ? str_word_count($node->filter('p')->text()) : null,
+                    'link' => $node->filter('a')->count() ? $node->filter('a')->attr('href') : null,
+                    'content' => $content['content'] ?? '',
+                    'date' => $content['date'] ?? null,
+                    'category' => $content['category'] ?? ''
+                ];
+                if (!Post::where('slug', create_slug($node->filter('.media-title')->text()))->exists()) {
+                    $this->save_data($data);
+                }
+//            }
+        });
+        array_splice($datas, 5);
+        return $datas;
+    }
+
+    public function get_content_vov($link)
+    {
+        $url = 'https://vov.vn/';
+        $crawl = $this->crawler($url.$link);
+        $content = preg_replace("/(\n|\t)/", '', strip_tags($crawl->filter('.article-content')->html(), "<p>,<strong>"));
+        $content = preg_replace('(<p class="Image">.+?<\/p>)', '', $content);
+        return [
+            'content' => $content,
+            'category' => $crawl->filter('.breadcrumb-item a')->count() ? $crawl->filter('.breadcrumb-item a')->text() : null,
+        ];
+    }
 
     public function crawlerBaoMoi($data)
     {
@@ -92,7 +129,7 @@ class SearchController extends Controller
                     if ($details) {
                         $content = $this->get_content($details);
                     }
-                    return $array = [
+                    $array = [
                         'title' => $node->filter('a')->count() ? $node->filter('a')->attr('title') : null,
                         'image' => $node->filter('img')->count() ? $node->filter('img')->attr('data-src') : null,
                         'description' => $node->filter('.description')->count() ? $node->filter('.description')->text() : null,
@@ -101,7 +138,7 @@ class SearchController extends Controller
                         'date' => $content['date'] ?? '',
                         'category' => $content['category'] ?? ''
                     ];
-                    if(!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()){
+                    if (!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()) {
                         $this->save_data($array);
                     }
                 }
@@ -129,15 +166,16 @@ class SearchController extends Controller
         $date = $crawl->filter('.date')->count() ? $crawl->filter('.date')->text() : null;
         $data = $crawl->filter('.fck_detail')->count() ? $crawl->filter('.fck_detail')->html() : 'null';
 
-        $content = preg_replace("/(\n|\t)/", '',strip_tags($data,"<p>,<strong>")) ;
-        $content = preg_replace('(<p class="Image">.+?<\/p>)', '',  $content);
-        $data = ['content' => $content, 'date' => $date, 'category' => $category ];
-        return  $data;
+        $content = preg_replace("/(\n|\t)/", '', strip_tags($data, "<p>,<strong>"));
+        $content = preg_replace('(<p class="Image">.+?<\/p>)', '', $content);
+        $data = ['content' => $content, 'date' => $date, 'category' => $category];
+        return $data;
     }
 
-    public function save_data($data){
-        \DB::transaction(function () use ($data){
-            if(!empty($data['category'])){
+    public function save_data($data)
+    {
+        \DB::transaction(function () use ($data) {
+            if (!empty($data['category'])) {
                 $array = [
                     'title' => $data['title'],
                     'user_id' => 1,
@@ -149,7 +187,7 @@ class SearchController extends Controller
                     'source' => 'Vnexpress',
                     'created_date' => $data['date']
                 ];
-                if(!Category::where('slug', create_slug($data['category']))->exists()){
+                if (!Category::where('slug', create_slug($data['category']))->exists()) {
                     Category::create([
                         'name' => $data['category'],
                         'slug' => create_slug($data['category'])
