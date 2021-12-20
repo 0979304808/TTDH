@@ -56,7 +56,7 @@ class SearchController extends Controller
 
     public function crawlerDataSearch($search)
     {
-        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?q=' . $search, 'https://vov.vn/search?keyword=' . $search . '&field_publish_categories=All&published_date=All'];
+        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?search_q='.$search.'&cate_code=&media_type=all&latest=&fromdate=&todate=&date_format=all&' . $search, 'https://vov.vn/search?keyword=' . $search . '&field_publish_categories=All&published_date=All'];
         foreach ($urls as $key => $url) {
             $data = $this->crawler($url);
 //            if ($key == 0) {
@@ -87,7 +87,9 @@ class SearchController extends Controller
                     'date' => $content['date'] ?? null,
                     'category' => $content['category'] ?? ''
                 ];
+//            dd(($node->filter('.media-title')->text()));
                 if (!Post::where('slug', create_slug($node->filter('.media-title')->text()))->exists()) {
+
                     $this->save_data($data);
                 }
 //            }

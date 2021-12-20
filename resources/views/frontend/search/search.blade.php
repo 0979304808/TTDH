@@ -45,7 +45,7 @@
                             </div>
                             <hr style="border-top: 1px solid #d0d0d0">
                         @endforeach
-                        <div>
+                        <div class="text-center">
                             {{ $posts->appends(['q'=>request('q')])->links() }}
                         </div>
                     @endif
