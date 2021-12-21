@@ -29,7 +29,7 @@ class SearchController extends Controller
         $view->with('tags', $tags);
         if ($search = request('q')) {
             $data = $this->crawlerDataSearch(request('q'));
-            $posts = Post::where('title', 'like', '%' . $search . '%')->where('description', 'like', '%' . $search . '%')->paginate();
+            $posts = Post::where('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%')->paginate();
 //            foreach ($posts as $post){
 //                $data[] = [
 //                    'id' => $post->id,
@@ -56,16 +56,16 @@ class SearchController extends Controller
 
     public function crawlerDataSearch($search)
     {
-        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?search_q='.$search.'&cate_code=&media_type=all&latest=&fromdate=&todate=&date_format=all&' . $search, 'https://vov.vn/search?keyword=' . $search . '&field_publish_categories=All&published_date=All'];
+        $urls = ['https://baomoi.com/tim-kiem/' . $search . '.epi', 'https://timkiem.vnexpress.net/?q=' . $search, 'https://vov.vn/search?keyword=' . $search];
         foreach ($urls as $key => $url) {
             $data = $this->crawler($url);
 //            if ($key == 0) {
 //                $datas = $this->crawlerBaoMoi($data);
 //                dd($datas);
 //            }
-            if ($key == 1) {
-                $datas = $this->crawlerVnexpress($data);
-            }
+//            if ($key == 1) {
+//                $datas = $this->crawlerVnexpress($data);
+//            }
             if ($key == 2) {
                 $datas = $this->crawlerVov($data);
             }
@@ -75,26 +75,26 @@ class SearchController extends Controller
 
     public function crawlerVov($data)
     {
-        $datas = $data->filter('.views-element-container .article-media')->each(function ($node) {
-            $content = $this->get_content_vov($node->filter('a')->attr('href'));
+        $datas = $data->filter('.views-element-container .article-media')->each(function ($node, $i) {
+            if ($i < 3){
+                $content = $this->get_content_vov($node->filter('a')->attr('href'));
 //            if (str_word_count($node->filter('p')->text()) < 255){
-                $data = [
+                 $data = [
                     'title' => $node->filter('.media-title')->count() ? $node->filter('.media-title')->text() : null,
                     'image' => $node->filter('img')->count() ? $node->filter('img')->attr('src') : null,
-                    'description' => $node->filter('p')->count() ? str_word_count($node->filter('p')->text()) : null,
+                    'description' => $node->filter('p')->count() ? substr($node->filter('p')->text(),0, 50)  : null,
                     'link' => $node->filter('a')->count() ? $node->filter('a')->attr('href') : null,
                     'content' => $content['content'] ?? '',
                     'date' => $content['date'] ?? null,
-                    'category' => $content['category'] ?? ''
+                    'category' => $content['category'] ?? '',
+                    'slug' => create_slug($node->filter('.media-title')->text())
                 ];
-//            dd(($node->filter('.media-title')->text()));
                 if (!Post::where('slug', create_slug($node->filter('.media-title')->text()))->exists()) {
-
                     $this->save_data($data);
                 }
 //            }
+            }
         });
-        array_splice($datas, 5);
         return $datas;
     }
 
@@ -124,30 +124,30 @@ class SearchController extends Controller
 
     public function crawlerVnexpress($data)
     {
-        $datas = $data->filter('.content-search .list-news-subfolder .item-news-common')->each(function ($node) {
-            if ($node->filter('.description')->count()) {
-                if ($node->filter('a')->count()) {
-                    $details = $this->crawler($node->filter('a')->attr('href'));
-                    if ($details) {
-                        $content = $this->get_content($details);
-                    }
-                    $array = [
-                        'title' => $node->filter('a')->count() ? $node->filter('a')->attr('title') : null,
-                        'image' => $node->filter('img')->count() ? $node->filter('img')->attr('data-src') : null,
-                        'description' => $node->filter('.description')->count() ? $node->filter('.description')->text() : null,
-                        'link' => $node->filter('a')->count() ? $node->filter('a')->attr('href') : null,
-                        'content' => $content['content'] ?? '',
-                        'date' => $content['date'] ?? '',
-                        'category' => $content['category'] ?? ''
-                    ];
-                    if (!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()) {
-                        $this->save_data($array);
+        $datas = $data->filter('.content-search .list-news-subfolder .item-news-common')->each(function ($node, $i) {
+            if ($i < 3 ){
+                if ($node->filter('.description')->count()) {
+                    if ($node->filter('a')->count()) {
+                        $details = $this->crawler($node->filter('a')->attr('href'));
+                        if ($details) {
+                            $content = $this->get_content($details);
+                        }
+                        $array = [
+                            'title' => $node->filter('a')->count() ? $node->filter('a')->attr('title') : null,
+                            'image' => $node->filter('img')->count() ? $node->filter('img')->attr('data-src') : null,
+                            'description' => $node->filter('.description')->count() ? $node->filter('.description')->text() : null,
+                            'link' => $node->filter('a')->count() ? $node->filter('a')->attr('href') : null,
+                            'content' => $content['content'] ?? '',
+                            'date' => $content['date'] ?? '',
+                            'category' => $content['category'] ?? ''
+                        ];
+                        if (!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()) {
+                            $this->save_data($array);
+                        }
                     }
                 }
             }
-
         });
-        array_splice($datas, 5);
         return $datas;
     }
 
@@ -176,6 +176,7 @@ class SearchController extends Controller
 
     public function save_data($data)
     {
+        dd($data);
         \DB::transaction(function () use ($data) {
             if (!empty($data['category'])) {
                 $array = [
