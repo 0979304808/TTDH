@@ -63,9 +63,9 @@ class SearchController extends Controller
 //                $datas = $this->crawlerBaoMoi($data);
 //                dd($datas);
 //            }
-//            if ($key == 1) {
-//                $datas = $this->crawlerVnexpress($data);
-//            }
+            if ($key == 1) {
+                $datas = $this->crawlerVnexpress($data);
+            }
             if ($key == 2) {
                 $datas = $this->crawlerVov($data);
             }
@@ -176,7 +176,6 @@ class SearchController extends Controller
 
     public function save_data($data)
     {
-        dd($data);
         \DB::transaction(function () use ($data) {
             if (!empty($data['category'])) {
                 $array = [
