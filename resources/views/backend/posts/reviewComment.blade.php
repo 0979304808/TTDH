@@ -76,7 +76,7 @@
                 <button class="btn btn-primary" id="btn-search-user">Tìm kiếm</button>-->
                 <a href="{{ route('backend.posts') }}">
                     <button class="btn btn-primary pull-right">Tất cả bài viết</button>
-                </a> 
+                </a>
                 <hr>
                 <div class="clearfix"></div>
             </div>
@@ -112,15 +112,19 @@
                                 <td class="text-center">
                                     @if($comment->status == 0 )
                                         <span style="background-color: #f0ad4e" class="badge badge-primary">Chưa duyệt</span>
-                                    @else
+                                    @elseif($comment->status == 1 )
                                         <span style="background-color: #5bc0de" class="badge badge-info">Đã duyệt</span>
+                                    @elseif($comment->status == 2 )
+                                        <span style="background-color: red" class="badge badge-danger">Spam</span>
                                     @endif
                                 </td>
                                 <td class="text-center">
                                     @if($comment->status == 0 )
                                         <a class="btn btn-info" href="{{ route('backend.comments.review', ['status' => 1, 'id' => $comment->id ]) }}">Duyệt</a>
-                                    @else
+                                    @elseif($comment->status == 1)
                                         <a class="btn btn-warning" href="{{ route('backend.comments.review', ['status' => 0, 'id' => $comment->id]) }}">Bỏ duyệt</a>
+                                    @elseif($comment->status == 2)
+                                        <a class="btn btn-primary">Spam</a>
                                     @endif
                                     <a class="btn btn-danger" href="{{ route('backend.comments.delete', $comment->id) }}">Xóa</a>
                                 </td>

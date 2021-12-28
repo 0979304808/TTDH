@@ -28,18 +28,8 @@ class SearchController extends Controller
         $view = view('frontend.search.search');
         $view->with('tags', $tags);
         if ($search = request('q')) {
-            $data = $this->crawlerDataSearch(request('q'));
+            $this->crawlerDataSearch(request('q'));
             $posts = Post::where('title', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%')->paginate();
-//            foreach ($posts as $post){
-//                $data[] = [
-//                    'id' => $post->id,
-//                    'title' => $post->title,
-//                    'slug' => $post->slug,
-//                    'image' => $post->image,
-//                    'description' => $post->description,
-//                    'content' => $post->content,
-//                ];
-//            }
             $view->with('posts', $posts);
         }
         return $view;
@@ -78,21 +68,21 @@ class SearchController extends Controller
         $datas = $data->filter('.views-element-container .article-media')->each(function ($node, $i) {
             if ($i < 3){
                 $content = $this->get_content_vov($node->filter('a')->attr('href'));
-//            if (str_word_count($node->filter('p')->text()) < 255){
-                 $data = [
+                  $data = [
                     'title' => $node->filter('.media-title')->count() ? $node->filter('.media-title')->text() : null,
                     'image' => $node->filter('img')->count() ? $node->filter('img')->attr('src') : null,
-                    'description' => $node->filter('p')->count() ? substr($node->filter('p')->text(),0, 50)  : null,
+                    'description' => $node->filter('p')->count() ? utf8_encode(substr($node->filter('p')->text(),0, 50))  : null,
                     'link' => $node->filter('a')->count() ? $node->filter('a')->attr('href') : null,
-                    'content' => $content['content'] ?? '',
+                    'content' => utf8_encode($content['content']) ?? '',
                     'date' => $content['date'] ?? null,
                     'category' => $content['category'] ?? '',
                     'slug' => create_slug($node->filter('.media-title')->text())
                 ];
-                if (!Post::where('slug', create_slug($node->filter('.media-title')->text()))->exists()) {
-                    $this->save_data($data);
+                if (str_word_count($node->filter('p')->text()) < 255){
+                    if (!Post::where('slug', create_slug($node->filter('.media-title')->text()))->exists()) {
+                        $this->save_data($data);
+                    }
                 }
-//            }
             }
         });
         return $datas;
@@ -112,10 +102,7 @@ class SearchController extends Controller
 
     public function crawlerBaoMoi($data)
     {
-        $datas = $data->filter('.bm_AN .bm_E')->each(function ($node) {
-//            return $node->html();
-//            return $node->filter('a')->attr('href');
-//            return $node->filter('a')->attr('title');
+        $datas = $data->filter('.bm_AC .bm_E')->each(function ($node) {
             return $node->filter('img')->attr('src');
         });
         array_splice($datas, 5);
@@ -141,9 +128,13 @@ class SearchController extends Controller
                             'date' => $content['date'] ?? '',
                             'category' => $content['category'] ?? ''
                         ];
-                        if (!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()) {
-                            $this->save_data($array);
+                        if (str_word_count($node->filter('.description')->text()) < 255)
+                        {
+                            if (!Post::where('slug', create_slug($node->filter('a')->attr('title')))->exists()) {
+                                $this->save_data($array);
+                            }
                         }
+
                     }
                 }
             }

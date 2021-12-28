@@ -147,8 +147,8 @@ if(!function_exists('curl_get')){
 
 if (!function_exists('check_spanm')){
     function check_spam($content){
-        $pattern = "/chó|chết/i";
-        if( preg_match($pattern, $content) != 0 ){
+        $pattern = "/chó|chết|điên|dại/i";
+        if(preg_match($pattern, $content) != 0){
             return true;
         }
         return false;

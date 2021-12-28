@@ -35,7 +35,7 @@
                         @if(Auth::check())
                             <textarea class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
                             @else
-                            <textarea data-toggle="modal" data-target="#myModal" class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
+                            <textarea data-toggle="modal" data-target="#my-Modal" class="input-form form-control" id="content_comment" name="content" id="" cols="10" rows="3"  placeholder="Ý kiến của bạn"></textarea>
                         @endif
                         <button type="button" class="btn btn-primary btn-submit-comment">Bình luận</button>
                     </form>

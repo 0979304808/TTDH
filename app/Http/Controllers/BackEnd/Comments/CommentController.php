@@ -23,11 +23,13 @@ class CommentController extends Controller
         $data = $request->all();
         event(new NewEvent($data));
         if ($data['type'] == 'comment') {
-            return $this->comment->create([
-                'user_id' => Auth::id(),
-                'post_id' => $data['id'],
-                'content' => $data['content']
-            ]);
+            if (!check_spam($data['content'])){
+                return $this->comment->create([
+                    'user_id' => Auth::id(),
+                    'post_id' => $data['id'],
+                    'content' => $data['content']
+                ]);
+            }
         }
         $id = explode('-', $data['id']);
         $id = end($id);
@@ -54,10 +56,11 @@ class CommentController extends Controller
     {
         $comment = $this->comment->find($id);
         if ($comment){
-            if (!check_spam($comment->content)){
-                $comment->update(['status' => $status]);
-                return redirect()->back()->with('Thành công');
+            if (check_spam($comment->content)){
+                $status = 2;
             }
+            $comment->update(['status' => $status]);
+            return redirect()->back()->with('Thành công');
         }
         return redirect()->back()->with('Thất bại');
     }

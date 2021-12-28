@@ -12,16 +12,27 @@ class CommentController extends Controller
     public function create(Request $request){
 
         $data = $request->all();
-        $comment = Comment::create([
-            'user_id' => Auth::id(),
-            'post_id' => $data['post_id'],
-            'content' => $data['content']
-        ]);
-        if($comment){
-            return response()->json('Thành công', 200);
+        $status = 0;
+        // Lưu vào databse khi spam và status = 2;
+        if (check_spam($data['content'])) {
+            $status = 2;
         }
-        return response()->json('Thất bại', 404);
-
+            $comment = Comment::create([
+                'user_id' => Auth::id(),
+                'post_id' => $data['post_id'],
+                'content' => $data['content'],
+                'status' => $status
+            ]);
+        // không lưu vào database khi spam
+//        if (!check_spam($data['content'])) {
+//            $comment = Comment::create([
+//                'user_id' => Auth::id(),
+//                'post_id' => $data['post_id'],
+//                'content' => $data['content'],
+//                'status' => $status
+//            ]);
+//        }
+        return response()->json('Thành công', 200);
     }
 
 
