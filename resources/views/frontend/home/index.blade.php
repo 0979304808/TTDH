@@ -5,7 +5,6 @@
 @section('content')
     <div class="home container">
         <div id="carousel-banner" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
             <ol class="carousel-indicators">
                 @foreach($banner as $key => $value)
                     <li data-target="#carousel-banner" data-slide-to="{{ $key }}"
@@ -13,7 +12,6 @@
                 @endforeach
             </ol>
 
-            <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 @foreach($banner as $key => $item)
                     <div class="item {{ $key == 0 ? 'active' : '' }}">
