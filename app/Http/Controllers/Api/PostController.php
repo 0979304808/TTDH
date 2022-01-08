@@ -25,4 +25,10 @@ class PostController extends Controller
         $posts = $this->post->all(['id', 'title', 'description', 'image']);
         return $this->success($posts,'200');
     }
+
+    public function detail($id)
+    {
+        $posts = $this->post->find($id);
+        return $this->success($posts,'200');
+    }
 }
