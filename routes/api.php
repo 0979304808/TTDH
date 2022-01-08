@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::group([
     'prefix' => 'post',
+    'namespace' => 'Api'
 ], function () {
     Route::get('/', 'PostController@list')->name('api.post.list');
 });

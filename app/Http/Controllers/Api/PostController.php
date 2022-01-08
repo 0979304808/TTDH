@@ -22,7 +22,7 @@ class PostController extends Controller
     }
     public function list()
     {
-        $posts = $this->post->all(['title', 'description']);
+        $posts = $this->post->all(['id', 'title', 'description', 'image']);
         return $this->success($posts,'200');
     }
 }
