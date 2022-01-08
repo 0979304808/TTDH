@@ -22,4 +22,5 @@ Route::group([
     'namespace' => 'Api'
 ], function () {
     Route::get('/', 'PostController@list')->name('api.post.list');
+    Route::get('/{id}', 'PostController@detail')->name('api.post.detail');
 });
