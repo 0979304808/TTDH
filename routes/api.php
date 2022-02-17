@@ -19,7 +19,8 @@ use Illuminate\Http\Request;
 
 Route::group([
     'prefix' => 'post',
-    'namespace' => 'Api'
+    'namespace' => 'Api',
+    'middleware' => 'cors'
 ], function () {
     Route::get('/', 'PostController@list')->name('api.post.list');
     Route::get('/{id}', 'PostController@detail')->name('api.post.detail');
