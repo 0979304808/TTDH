@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+    db:
+        image: wodby/mariadb:10.6
+        container_name: "${APP_NAME}_mysql"
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+            MYSQL_DATABASE: $DB_DATABASE
+            MYSQL_USER: $DB_USERNAME
+            MYSQL_PASSWORD: $DB_PASSWORD
+        volumes:
+            - ./data:/backup
+        ports:
+            - "3302:3306"
+    php:
+        image: wodby/php:7.4
+        container_name: "${APP_NAME}_php"
+        environment:
+            DB_HOST: db
+            DB_USER: $DB_USERNAME
+            DB_PASSWORD: $DB_PASSWORD
+            DB_NAME: $DB_DATABASE
+            DB_DRIVER: $DB_DRIVER
+            PHP_MEMORY_LIMIT: 10240M
+        volumes:
+            - ./:/var/www/html
+    nginx:
+        image: wodby/nginx:1.21
+        container_name: "${APP_NAME}_nginx"
+        depends_on:
+            - php
+        environment:
+            NGINX_STATIC_OPEN_FILE_CACHE: "off"
+            NGINX_ERROR_LOG_LEVEL: debug
+            NGINX_BACKEND_HOST: php
+            NGINX_SERVER_ROOT: /var/www/html/public
+            NGINX_VHOST_PRESET: php
+        volumes:
+            - ./:/var/www/html
+        labels:
+            - 'traefik.backend=${APP_NAME}_nginx'
+            - 'traefik.port=80'
+            - 'traefik.frontend.rule=Host:${APP_URL}'
+        ports:
+            - '89:80'
+    node:
+        image: node
+        container_name: "${APP_NAME}_node"
+        command: tail -f /dev/null
+        volumes:
+            - ./src:/app
